@@ -1,0 +1,493 @@
+
+@font-face {
+    font-family: 'labs';
+    src: url('fonts/labs.eot?h1gfm');
+    src: url('fonts/labs.eot?h1gfm#iefix') format('embedded-opentype'),
+         url('fonts/labs.ttf?h1gfm') format('truetype'),
+         url('fonts/labs.woff?h1gfm') format('woff'),
+         url('fonts/labs.svg?h1gfm#labs') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'labs' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.labs-icon-times:before {
+    content: "\f00d";
+}
+.labs-icon-close:before {
+    content: "\f00d";
+}
+.labs-icon-arrow-down-circle-o:before {
+    content: "\f01a";
+}
+.labs-icon-arrow-up-circle-o:before {
+    content: "\f01b";
+}
+.labs-icon-chevron-left:before {
+    content: "\f053";
+}
+.labs-icon-chevron-right:before {
+    content: "\f054";
+}
+.labs-icon-plus-circle:before {
+    content: "\f055";
+}
+.labs-icon-minus-circle:before {
+    content: "\f056";
+}
+.labs-icon-times-circle:before {
+    content: "\f057";
+}
+.labs-icon-close-circle:before {
+    content: "\f057";
+}
+.labs-icon-arrow-left:before {
+    content: "\f060";
+}
+.labs-icon-arrow-right:before {
+    content: "\f061";
+}
+.labs-icon-arrow-up:before {
+    content: "\f062";
+}
+.labs-icon-arrow-down:before {
+    content: "\f063";
+}
+.labs-icon-plus:before {
+    content: "\f067";
+}
+.labs-icon-minus:before {
+    content: "\f068";
+}
+.labs-icon-chevron-up:before {
+    content: "\f077";
+}
+.labs-icon-chevron-down:before {
+    content: "\f078";
+}
+.labs-icon-arrow-left-circle:before {
+    content: "\f0a8";
+}
+.labs-icon-arrow-right-circle:before {
+    content: "\f0a9";
+}
+.labs-icon-arrow-up-circle:before {
+    content: "\f0aa";
+}
+.labs-icon-arrow-down-circle:before {
+    content: "\f0ab";
+}
+.labs-icon-filter:before {
+    content: "\f0b0";
+}
+.labs-icon-chain:before {
+    content: "\f0c1";
+}
+.labs-icon-link:before {
+    content: "\f0c1";
+}
+.labs-icon-caret-down:before {
+    content: "\f0d7";
+}
+.labs-icon-caret-up:before {
+    content: "\f0d8";
+}
+.labs-icon-caret-left:before {
+    content: "\f0d9";
+}
+.labs-icon-caret-right:before {
+    content: "\f0da";
+}
+.labs-icon-double-angle-left:before {
+    content: "\f100";
+}
+.labs-icon-double-angle-right:before {
+    content: "\f101";
+}
+.labs-icon-double-angle-up:before {
+    content: "\f102";
+}
+.labs-icon-double-angle-down:before {
+    content: "\f103";
+}
+.labs-icon-angle-left:before {
+    content: "\f104";
+}
+.labs-icon-angle-right:before {
+    content: "\f105";
+}
+.labs-icon-angle-up:before {
+    content: "\f106";
+}
+.labs-icon-angle-down:before {
+    content: "\f107";
+}
+.labs-icon-chevron-right-circle:before {
+    content: "\f138";
+}
+.labs-icon-angle-up-circle:before {
+    content: "\f139";
+}
+.labs-icon-angle-down-circle:before {
+    content: "\f13a";
+}
+.labs-icon-caret-down-square-o:before {
+    content: "\f150";
+}
+.labs-icon-caret-up-square-o:before {
+    content: "\f151";
+}
+.labs-icon-caret-right-square-o:before {
+    content: "\f152";
+}
+.labs-icon-arrow-right-circle-o:before {
+    content: "\f18e";
+}
+.labs-icon-arrow-left-circle-o:before {
+    content: "\f190";
+}
+.labs-icon-caret-left-square-0:before {
+    content: "\f191";
+}
+.labs-icon-toggle-left-square-o:before {
+    content: "\f191";
+}
+
+
+
+
+
+.multi-tax-browser-control .current-taxonomies, 
+.multi-tax-browser-control .related-taxonomies {
+    margin-left: 5px;
+}
+
+.multi-tax-browser-control .current-taxonomies a, 
+.multi-tax-browser-control .related-taxonomies a {
+    cursor: pointer;
+    display: block;
+    margin: 0.2em 0em;
+    padding: .1em .2em;
+    border: 1px solid #eee;
+}
+
+.multi-tax-browser-control .related-taxonomies .presentation {
+  overflow: visible;
+}
+
+.multi-tax-browser-control .current-taxonomies {
+	margin-bottom:1em;
+}
+
+.multi-tax-browser-control .current-taxonomies .title {
+	display:none;
+}
+
+.multi-tax-browser-control .related-taxonomies .title {
+	display:block;
+}
+
+.multi-tax-browser-control .related-taxonomies .title:after {
+	font-family:'labs';
+	float: right;
+	margin-right:0.5em;
+}
+
+.multi-tax-browser-control .related-taxonomies .title.show:after {
+	content:"\f0d7";
+}
+
+.multi-tax-browser-control .related-taxonomies .title.hide:after {
+	content:"\f0d8";
+}
+
+.multi-tax-browser-control .related-taxonomies .title:hover {
+	cursor:pointer;
+	text-decoration:underline;
+}
+
+.multi-tax-browser-control .related-taxonomies .results {
+	padding:0.5em 0em;
+}
+
+.multi-tax-browser-control .current-taxonomies a:before {
+	font-family:'labs';
+    content: "\f056";
+    margin-right:0.5em;
+}
+
+.multi-tax-browser-control .related-taxonomies a:before {
+	font-family:'labs';
+    content: "\f055";
+    margin-right:0.5em;
+}
+
+.multi-tax-browser-control .related-taxonomies a > span {
+	display:inline-block;
+	width:0.5em;
+}
+
+.multi-tax-browser-control .related-taxonomies .more {
+	display:block;
+	text-align:right;
+	font-size:0.7em;
+	line-height:2em;
+}
+
+.multi-tax-browser-control .related-taxonomies .more:hover {
+	cursor:pointer;
+	text-decoration:underline;
+}
+
+#content .entry-content {
+    margin-bottom: 1em;
+}
+
+#content .taxonomy-list.building-list .list,
+#content .taxonomy-list.department-list .list,
+#content .taxonomy-list.seating-capacity-list .list,
+#content .taxonomy-list.availability-list .list,
+#content .taxonomy-list.building-list .list .column,
+#content .taxonomy-list.department-list .list .column,
+#content .taxonomy-list.seating-capacity-list .list .column,
+#content .taxonomy-list.availability-list .list .column {
+	display: inline-block;
+}
+
+#content .taxonomy-list.building-list .list .column a,
+#content .taxonomy-list.department-list .list .column a,
+#content .taxonomy-list.seating-capacity-list .list .column a,
+#content .taxonomy-list.availability-list .list .column a {
+	display: inline-block;
+	margin-right:1em;
+}
+
+#content .taxonomy-list .taxonomy-label {
+	line-height:1.7em;
+}
+
+#content .taxonomy-list a {
+    cursor:pointer;
+    display:inline-block;
+    margin:0em;
+    padding:0em;
+    border:none;
+}
+
+#content .taxonomy-list a:hover {
+	border:none;
+	text-decoration:underline;
+}
+
+#content .taxonomy-list.software-list {
+	width:100%;
+}
+
+#content .taxonomy-list.software-list .list .column span {
+	display:block;
+	white-space: nowrap;
+	overflow:hidden;
+	text-overflow: ellipsis;
+}
+
+#content .taxonomy-list.software-list .list {
+    border: solid 1px #ccc;
+    padding: 2%;
+    background-color:#efefef;
+    width:100%;
+}
+
+#content .post {
+	margin-bottom:1em;
+}
+
+@media (min-width: 48.000em) {
+
+	#content .taxonomy-list.software-list .list .column {
+		width:30%;
+		margin-right: 2%;
+		display: inline-block;
+		vertical-align:top;
+	}
+
+}
+
+#content .breadcrumbs {
+	margin:0em;
+}
+
+
+
+
+
+
+	#content .clas-search {
+		height:60px;
+		margin-top:2em;
+	}
+	
+	#content .clas-search h2 {
+		font-size:0.7em;
+		text-align:right;
+		margin-bottom:0;
+	}
+	
+	#content .clas-search .screen-reader-text {
+		display:none;
+	}
+	
+	#content .clas-search form {
+		position:relative;
+	}
+	
+	#content .clas-search .textbox_wrapper {
+	  position:absolute;
+	  top:0;
+	  left:0;
+	  right:0;
+	  height:30px;
+	  border:solid 1px #ccc;
+	  padding:0;
+	  padding-left:5px;
+	  padding-right:125px;
+	  overflow:hidden;
+	}
+
+	#content .clas-search input[type="text"] {
+	  font-size:1em;
+	  height:30px;
+	  margin:0px;
+	  border-radius:0;
+	  border:0;
+	  width:100%;
+	}
+
+	#content .clas-search input[type="text"]:focus {
+		outline:none;
+	}
+	
+	#content .clas-search input[type="text"].unused {
+		color:#666;
+	}
+
+	#content .clas-search input[type="submit"] {
+	  position:absolute;
+	  top:0;
+	  right:0;
+	  width:120px;
+	  font-size:1em;
+	  height:32px;
+	  border-radius:0;
+	  margin-left:5px;
+	  border:solid 1px #ccc;
+	  background-color:#f6f6f6;
+	}
+	
+	
+	
+	
+	#content .breadcrumb {
+		margin: 0.2em 0em;
+		font-size: 0.8em;
+	}
+	
+	#content .breadcrumb .remove:before {
+		font-family:'labs';
+		content: "\f057";
+	}
+
+	#content .breadcrumb .remove {
+		margin-right:0.5em;
+	}
+
+	.searchandfilter > ul > li[data-sf-field-input-type="checkbox"] > ul {
+		display: block;
+		max-height: 10em;
+		overflow-y: scroll;
+		border: solid 1px #ccc;
+		padding: 0em 0.5em;
+	}
+
+	.searchandfilter li.sf-field-submit {
+		padding: 0 !important;
+		margin: 0;
+	}
+
+	.searchandfilter li.sf-field-submit input {
+		font-size: 0.8em;
+	}
+
+	.searchandfilter li > h4 {
+		padding: 0 !important;
+		padding-bottom: 0.2em !important;
+		font-weight:bold;
+		font-size:0.9em;
+	}
+
+	.searchandfilter .sf-label-checkbox {
+		font-size:0.9em;
+		display:inline-block;
+	}
+
+	.searchandfilter .sf-level-0 {
+		padding:0;
+		margin:0.2em 0em;
+	}
+	
+	.current-filters h4 {
+		font-size: 0.8em;
+		text-decoration: underline;
+		font-weight: bold;
+		display: inline-block;
+		margin: 0em 1em 0em 0em;
+		padding: 0.2em 0em;
+	}
+	
+	.current-filters a.clear-filters {
+		display: inline-block;
+		font-size: 0.8em;
+		padding: 0.2em 0em;
+	}
+	
+	.searchandfilter .checkbox-label {
+		background-position:left 0.2em;
+		background-image:url('images/checkbox-empty.png');
+		background-repeat:no-repeat;
+		padding-left: 1.5em !important;
+		background-size: 1em;
+		display: inline-block !important;
+	}
+	
+	.searchandfilter .checkbox-label:hover {
+		cursor:pointer;
+	}
+	
+	.searchandfilter .checkbox-label.checked {
+		background-image:url('images/checkbox-checked.png');
+	}
+	
+	#content .found-posts {
+		float:right;
+	}
+	
+	#content .page-term-description {
+		margin:0.5em 0em;
+		font-size:0.8rem;
+		color:#333;
+	}
+	
+	
