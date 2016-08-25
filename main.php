@@ -294,3 +294,44 @@ function labs_get_sfp_remove_link( $term )
 }
 endif;
 
+
+
+
+if( ! function_exists( 'labs_get_acf_select_value' ) ):
+function labs_get_acf_select_value( $name, $post_id = null )
+{
+	if( ! $post_id ) {
+		global $post;
+		$post_id = $post->ID;
+	}
+	
+	$object = get_field_object( $name, $post_id, array( 'load_value' => true, 'format_value' => false ) );
+	
+	if( 'null' === $object['value'] ) {
+		$object['value'] = '';
+	} elseif( ! empty( $object['choices'] ) && isset( $object['choices'][ $object['value'] ] ) ) {
+		$object['value'] = $object['choices'][ $object['value'] ];
+	}
+	
+	return $object['value'];
+}
+endif;
+
+
+if( ! function_exists( 'labs_get_acf_string_value' ) ):
+function labs_get_acf_string_value( $name, $post_id = null )
+{
+	if( ! $post_id ) {
+		global $post;
+		$post_id = $post->ID;
+	}
+
+	$object = get_field_object( $name, $post_id, array( 'load_value' => true, 'format_value' => false ) );
+	
+	if( 'null' === $object['value'] || ! $object['value'] ) {
+		$object['value'] = '';
+	}
+	
+	return $object['value'];
+}
+endif;

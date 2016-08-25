@@ -35,24 +35,27 @@ if( $post->post_type === 'references') {
 		<?php if( $post->post_type === 'references'): ?>
 		
 			<div class="ref-field">
-			<span class="ref-label ref-author-label">Authors:</span> 
-			<?php the_field('article-authors'); ?>
+			<span class="ref-label ref-author-label">Attribution:</span> 
+			<?php echo labs_get_acf_string_value( 'article-authors' ); ?>
+			</div>
+			<div class="ref-field"> 
+			<?php echo labs_get_taxonomy_terms('researcher', $post); ?>
 			</div>
 			<div class="ref-field">
 			<span class="ref-label ref-university-label">University Affiliation:</span> 
-			<?php the_field('university'); ?>
+			<?php echo labs_get_acf_string_value( 'university' ); ?>
 			</div>
 			<div class="ref-field">
 			<span class="ref-label ref-email-label">Email:</span> 
-			<?php the_field('email'); ?>
+			<?php echo labs_get_acf_string_value( 'email' ); ?>
 			</div>
 			<div class="ref-field">
 			<div class="ref-label ref-question-label">Research Question:</div> 
-			<?php apply_filters(the_field('research_question')); ?>
+			<?php echo get_post_meta( $post->ID, 'research_question', true ); ?>
 			</div>
 			<div class="ref-field">
 			<span class="ref-label ref-published-label">Published:</span> 
-			<?php apply_filters(the_field('published')); ?>
+			<?php echo labs_get_acf_select_value( 'published' ); ?>
 			</div>
 			<div class="ref-field">
 			<span class="ref-label ref-journal-label">Journal Name or Institutional Affiliation:</span> 
