@@ -43,6 +43,50 @@ add_filter( 'mt_related_tax_title', 'labs_related_tax_title', 10, 3 );
 add_action( 'vtt-search-folders', 'labs_variations_add_variations_folder' );
 add_action( 'wp_head', 'labs_wp_head' );
 
+/**
+ * 
+ */
+function labs_get_anchor( $url, $title, $class = null, $contents = null )
+{
+	if( empty($url) ) return $contents;
+	
+	$anchor = '<a href="'.$url.'" title="'.htmlentities($title).'"';
+	if( $class ) $anchor .= ' class="'.$class.'"';
+	$anchor .= '>';
+
+	if( $contents !== null )
+		$anchor .= $contents.'</a>';
+
+	return $anchor;
+}
+
+/**
+ * 
+ */
+function labs_get_taxonomy_breadcrumbs( $term_id, $taxonomy = 'category', $include_home = FALSE )
+{
+	$term = get_term( $term_id, $taxonomy );
+	if( $term === null || is_wp_error($term) ) return '';
+	
+	$breadcrumbs = array();
+	
+	if( $include_home ) {
+		$breadcrumbs[] = '<a href="'.site_url().'" title="Home">Home</a>';
+	}
+	
+	while( $term->parent )
+	{
+		$term = get_term( $term->parent, $taxonomy );
+		$link = get_term_link( $term, $taxonomy );
+		$title = $term->name;
+		$breadcrumbs[] = '<a href="'.$link.'" title="'.$title.'">'.$title.'</a>';
+	}
+	
+	if( count($breadcrumbs) > 0 ) {
+		return implode( ' &raquo; ',  $breadcrumbs ).' &raquo; ';
+	}
+	return '';
+}
 
 /**
  * 
