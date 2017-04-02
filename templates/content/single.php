@@ -68,7 +68,13 @@ if( $post->post_type === 'references') {
 			</div>
 			<div class="ref-field">
 			<span class="ref-label ref-year-label">Year:</span> 
-			<?php echo labs_get_taxonomy_terms('year', $post, "true", "false"); ?>	
+			<?php
+			if (labs_get_taxonomy_terms('year', $post, "true", "false") != "") {
+				echo labs_get_taxonomy_terms('year', $post, "true", "false");
+			} else {
+				echo labs_get_acf_select_value( 'publication_year' ); 
+			}
+			?>	
 			</div>			
 			<span class="ref-label ref-findings-label">Findings:</span>	
 		<?php endif; ?>
