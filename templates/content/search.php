@@ -3,19 +3,27 @@
 
 <?php
 
-global $searchandfilter, $wp_the_query;
+global $searchandfilter, $wp_the_query, $post;
 $is_sfpage = false;
 $sf_names = array();
 $sf_descriptions = array();
 
+
 if( isset( $_GET ) && isset( $_GET['sfid'] ) )
 {
+	//$sf_filter_slug = '/?sfid=1724&_sft_';
+	$sf_filter_slug = '/?sfid='.$_GET['sfid'].'&_sft_';
 	$is_sfpage = true;
 	echo '<div class="found-posts">'.$wp_the_query->found_posts.' posts found.</div>';
-	
+//	echo '<div class="found-posts">'.$wp_the_query->query['paged'].' of '.$wp_the_query->max_num_pages.'</div>';
 	echo '<div class="current-filters">';
 	echo '<h4>Current Selections</h4>';
-	echo '<a class="clear-filters" href="' . esc_attr( home_url() ) . '" title="Clear Filters">Clear</a>';
+	if( $post->post_type === 'references') {
+		$clear_link = home_url().$sf_filter_slug;
+	} else {
+	 	home_url();
+	}
+	echo '<a class="clear-filters" href="' . esc_attr( $clear_link ) . '" title="Clear Filters">Clear</a>';
 	
 	$sfid = (int)( $_GET['sfid'] );
 	$sf_inst = $searchandfilter->get( $sfid );
@@ -37,14 +45,21 @@ if( isset( $_GET ) && isset( $_GET['sfid'] ) )
 				$terms = explode( ',', $_GET[ $field ] );
 			}
 			
-			foreach( $terms as $term )
+			foreach( $terms as $term_slug )
 			{
-				$term = get_term_by( 'slug', $term, $taxname );
+				$term = get_term_by( 'slug', $term_slug, $taxname );
 				echo '<div class="breadcrumb">';
 				echo '<a class="remove" href="' . esc_attr( labs_get_sfp_remove_link( $term ) ) . '" title="Remove '. esc_attr($term->name) . ' from filter"></a>';
 				echo $taxonomy->labels->name . ' &raquo; ';
-				echo vtt_get_taxonomy_breadcrumbs( $term->term_id, $taxname );
-				echo '<a href="' . esc_attr( get_term_link( $term, $taxname ) ) . '" title="' . esc_attr( $term->name ) . '">' . $term->name . '</a>';
+				echo labs_get_taxonomy_breadcrumbs( $term->term_id, $taxname );
+				
+				if( $post->post_type === 'references') {
+					$term_link = site_url().$sf_filter_slug.$taxname.'='.$term_slug;
+					echo '<a href="' . $term_link . '" title="' . esc_attr( $term->name ) . '">' . $term->name . '</a>';
+				} else {				
+					echo '<a href="' . esc_attr( get_term_link( $term, $taxname ) ) . '" title="' . esc_attr( $term->name ) . '">' . $term->name . '</a>';			
+				}
+				
 				//echo '<div class="page-term-description">' . apply_filters( 'term_description', $term->description ) . '</div>';
 				echo '</div>';
 				
@@ -83,7 +98,9 @@ if( have_posts() ):
 		echo '<div class="page-term-description">' . vtt_get_page_description() . '</div>';
 	}
 
-	vtt_get_template_part( 'listing', 'content', vtt_get_post_type() );
+	vtt_get_template_part( 'listing', 'content', vtt_get_post_type() 
+	
+	);
 	
 else:
 
