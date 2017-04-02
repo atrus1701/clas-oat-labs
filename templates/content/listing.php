@@ -1,10 +1,43 @@
 <?php //vtt_print('default:content:listing'); ?>
 <?php
+global $wp_query, $wp, $post;
 $is_mt = false;
+$is_sf = false;
+$search_term = "";
+$sf_id = '/?sfid=1724&';
+$sf_term = '_sft_';
+
 if( function_exists('mt_is_archive') && function_exists('mt_is_search') && 
 	( mt_is_archive() || mt_is_search() ) )
 {
 	$is_mt = true;
+}
+
+$is_mt = true;
+
+if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
+	$is_sf = true;
+}
+
+if ( is_tax() ) {
+	$term_slug = get_query_var( 'term' );
+	$taxname = get_query_var( 'taxonomy' );
+	$term_link = site_url().$sf_id.$sf_term.$taxname.'='.$term_slug;
+	wp_redirect( $term_link );
+	exit;
+} else if ( is_search() ) {
+	$search_term = urlencode(get_search_query());
+	echo $search_term;
+	$search_link = site_url().$sf_id.'_sf_s='.$search_term;
+	echo $search_link;
+	//exit;
+	wp_redirect( $search_link );
+	exit;
+
+} else {
+	//$current_url = add_query_arg( $_SERVER['QUERY_STRING'], '', home_url( $wp->request ) );
+	//echo $current_url
+	//exit;
 }
 ?>
 
@@ -21,13 +54,30 @@ if( function_exists('mt_is_archive') && function_exists('mt_is_search') &&
 			foreach( $terms as $term_slug )
 			{
 				$term = get_term_by( 'slug', $term_slug, $taxname );
-				$link = vtt_get_anchor(
+				$link = labs_get_anchor(
 					get_term_link( $term, $taxname ),
 					$term->name,
 					null,
 					$term->name
 				);
+								
+				if( $post->post_type === 'references') {					
+					$term_link = site_url().$sf_filter_slug.$taxname.'='.$term_slug;
+					$title = $term->name;
+					$content = $term->name;
+					$link = labs_get_anchor(
+						$term_link,
+						$term->name,
+						null,
+						$term->name
+					);				
+				
+				}
+							
 				if( $term ) {
+					$post_count = $wp_query->found_posts;
+					echo '<div class="found-posts">'.$post_count.' posts found</div>';
+				//	echo '<div class="current-filters"><h4>Current Selection</h4></div>';
 					echo '<div class="breadcrumbs">' .
 						$taxonomy->label .
 						' &raquo; ' .
@@ -43,9 +93,12 @@ if( function_exists('mt_is_archive') && function_exists('mt_is_search') &&
 	elseif( is_a( get_queried_object(), 'WP_Term' ) )
 	{
 		$qo = get_queried_object();
+		$post_count = $wp_query->found_posts;
+		echo '<div class="found-posts">'.$post_count.' posts found</div>';
 		echo '<div class="breadcrumbs">' .
 			vtt_get_taxonomy_breadcrumbs( $qo->term_id, $qo->taxonomy ) .
 			'</div>';
+
 	}
 	?>
 	
@@ -57,30 +110,36 @@ if( function_exists('mt_is_archive') && function_exists('mt_is_search') &&
 	<?php
 	if( $is_mt )
 	{
-		echo '<h1>';
+		
 		if( count( $filter_terms ) > 0 ) {
 			$term_names = array();
 			foreach( $filter_terms as $term ) {
 				$term_names[] = $term->name;
 			}
+			echo '<h1>';
 			echo implode( ' / ', $term_names );
+			echo '</h1>';
 		}
 		elseif( mt_is_filtered_archive() ) {
-			echo 'Filtered Results';
+			echo '<h1>Filtered Results</h1>';
 		}
 		elseif( mt_is_combined_archive() ) {
-			echo 'Combined Results';
+			echo '<h1>Combined Results</h1>';
 		}
 		elseif( mt_is_filtered_search() ) {
-			echo 'Filtered Search Results';
+			echo '<h1>Filtered Search Results</h1>';
 		}
 		elseif( mt_is_combined_search() ) {
-			echo 'Combined Search Results';
+			echo '<h1>Combined Search Results</h1>';
 		}
 		else {
-			echo 'Archives';
+			if( isset( $_GET ) && isset( $_GET['_sf_s'] ) ) {
+				if (isset($search_term)) {
+					echo '<h1>Filtered Search Results</h1>';
+				}
+			}
 		}
-		echo '</h1>';
+		
 	}
 	elseif( !is_home() )
 	{
