@@ -3,8 +3,9 @@
 global $post;
 $featured_image_position = $vtt_config->get_value( 'featured-image-position' );
 if( $post->post_type === 'references') {
-	$year_terms = get_the_terms($post, 'year');
-	$year = $year_terms[0];
+// 	$year_terms = get_the_terms($post, 'year');
+// 	$year = $year_terms[0];
+	$year = labs_get_acf_select_value( 'publication_year' );
 }
 ?>
 
@@ -12,7 +13,7 @@ if( $post->post_type === 'references') {
 <div class="page-title">
 	<div class="breadcrumbs"><?php echo vtt_get_breadcrumbs( $post ); ?></div>
 	<?php if( $post->post_type === 'references'): ?>
-		<?php echo '<h1>'.$year->name." - ".vtt_get_page_title().'</h1>'; ?>
+		<?php echo '<h1>'.$year." - ".vtt_get_page_title().'</h1>'; ?>
 	<?php else:?>	
 		<?php echo '<h1>'.vtt_get_page_title().'</h1>'; ?>
 	<?php endif; ?>
