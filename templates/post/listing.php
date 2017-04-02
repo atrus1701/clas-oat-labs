@@ -3,8 +3,9 @@
 global $vtt_config, $post;
 $featured_image_position = $vtt_config->get_value( 'featured-image-position' );
 if( $post->post_type === 'references') {
-	$year_terms = get_the_terms($post, 'year');
-	$year = $year_terms[0];
+// 	$year_terms = get_the_terms($post, 'year');
+// 	$year = $year_terms[0];
+	$year = labs_get_acf_select_value( 'publication_year' );
 }
 ?>
 
@@ -13,7 +14,7 @@ if( $post->post_type === 'references') {
 
 	<h2 class="entry-title"><a href="<?php echo get_permalink($post->ID); ?>">
 	<?php if( $post->post_type === 'references'): ?>
-		<?php echo $year->name." - ".$post->post_title; ?></a>
+		<?php echo $year." - ".$post->post_title; ?></a>
 	<?php else:?>
 		<?php echo $post->post_title; ?></a>
 	<?php endif; ?>
