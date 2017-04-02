@@ -7,6 +7,7 @@ $class = '';
 $sidebar_count = 0;
 $use_left_sidebar = false;
 $use_right_sidebar = false;
+$search_term = get_search_query();
 
 if( array_key_exists('vtt-left-sidebar', $widgets) && count($widgets['vtt-left-sidebar']) ):
 	$use_left_sidebar = true;
@@ -43,7 +44,7 @@ switch( $sidebar_count )
 		<div>
 			<label class="screen-reader-text" for="s">Search for:</label>
 			<div class="textbox_wrapper">
-				<input name="s" type="text" value="" placeholder="<?php echo esc_attr( $placeholder ); ?>" class="ui-autocomplete-input" autocomplete="off">
+				<input name="s" type="text" value="<?php echo $search_term ?>" placeholder="<?php echo esc_attr( "Search..." ); ?>" class="ui-autocomplete-input" autocomplete="off">
 			</div>
 			<input type="submit" id="searchsubmit" value="Search">
 		</div>
