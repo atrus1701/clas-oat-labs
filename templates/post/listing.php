@@ -35,8 +35,14 @@ if( $post->post_type === 'references') {
 				<?php if( $post->post_type === 'references'): ?>
 					Authors: 					
 					<?php the_field('article-authors') ?>
+					<p>
+					<?php echo wp_trim_words( get_the_excerpt( $post ), $num_words = 20, $more = null ); ?> 
+					</p>
+				<?php else: ?>
+					<?php the_excerpt(); ?>
 				<?php endif; ?>
-				<?php the_excerpt(); ?>
+				
+				<a class="more-link" href="<?php echo get_permalink($post->ID); ?>">Read more...</a></hr>
 			<?php else:?>
 				<?php if( $post->post_type === 'references'): ?>
 					Authors: 					
