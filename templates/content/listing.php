@@ -4,7 +4,7 @@ global $wp_query, $wp, $post;
 $is_mt = false;
 $is_sf = false;
 $search_term = "";
-$sf_id = '/?sfid=1724&';
+$sf_id = '/?sfid=1721&';
 $sf_term = '_sft_';
 
 if( function_exists('mt_is_archive') && function_exists('mt_is_search') && 
@@ -26,13 +26,11 @@ if ( is_tax() ) {
 	wp_redirect( $term_link );
 	exit;
 } else if ( is_search() ) {
-	$search_term = urlencode(get_search_query());
-	echo $search_term;
-	$search_link = site_url().$sf_id.'_sf_s='.$search_term;
-	echo $search_link;
-	//exit;
-	wp_redirect( $search_link );
-	exit;
+// 	$search_term = urlencode(get_search_query());
+// 	$search_link = site_url().$sf_id.'_sf_s='.$search_term;
+// 	wp_redirect( $search_link );
+// 	exit;
+
 
 } else {
 	//$current_url = add_query_arg( $_SERVER['QUERY_STRING'], '', home_url( $wp->request ) );
