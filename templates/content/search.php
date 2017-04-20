@@ -8,9 +8,7 @@ $is_sfpage = false;
 $sf_names = array();
 $sf_descriptions = array();
 
-
-if( isset( $_GET ) && isset( $_GET['sfid'] ) )
-{
+if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 	//$sf_filter_slug = '/?sfid=1724&_sft_';
 	$sf_filter_slug = '/?sfid='.$_GET['sfid'].'&_sft_';
 	$is_sfpage = true;
@@ -74,6 +72,8 @@ if( isset( $_GET ) && isset( $_GET['sfid'] ) )
 	}
 	
 	echo '</div>';	
+} else {
+	echo '<div class="found-posts">'.$wp_the_query->found_posts.' posts found.</div>';
 }
 
 
