@@ -166,10 +166,28 @@ if( !have_posts() ):
 	echo '<p>No posts.</p>';
 
 else:
-
+	
+	$number = 1;
 	while( have_posts() ):
 		the_post();
-		vtt_get_template_part( 'listing', 'post', vtt_get_post_type() );
+		if( $post->post_type === 'references') {
+			$year = labs_get_acf_select_value( 'publication_year' );
+		}
+		?>
+		<div <?php post_class(); ?>>
+
+		<h2 class="entry-title"><a href="<?php echo get_permalink($post->ID); ?>">
+		<?php if( $post->post_type === 'references'): ?>
+			<?php echo $number++.") ".$year." - ".$post->post_title; ?></a>
+		<?php else:?>
+			<?php echo $post->post_title; ?></a>
+		<?php endif; ?>
+		</h2>
+	
+		<?php	
+		vtt_get_template_part( 'listing', 'post', vtt_get_post_type(), $number );
+		echo '</div>';
+		//$number ++;
 	endwhile;
  
 	vtt_get_template_part( 'pagination', 'other', vtt_get_queried_object_type() );
