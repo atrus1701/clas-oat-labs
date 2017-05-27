@@ -12,14 +12,6 @@ if( $post->post_type === 'references') {
 
 <div <?php post_class(); ?>>
 
-	<h2 class="entry-title"><a href="<?php echo get_permalink($post->ID); ?>">
-	<?php if( $post->post_type === 'references'): ?>
-		<?php echo $year." - ".$post->post_title; ?></a>
-	<?php else:?>
-		<?php echo $post->post_title; ?></a>
-	<?php endif; ?>
-	</h2>
-
 	<div class="description">
 		
 		<div class="entry-content">
