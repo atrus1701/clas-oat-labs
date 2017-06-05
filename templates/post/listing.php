@@ -25,11 +25,12 @@ if( $post->post_type === 'references') {
 			
 			<?php if( $post->post_excerpt || is_search()): ?>
 				<?php if( $post->post_type === 'references'): ?>
-					Authors: 					
+					<div class="attribution">Authors: 					
 					<?php the_field('article-authors') ?>
-					<p>
+					</div>
+					<div class="research-question">
 					<?php echo wp_trim_words( get_post_meta( $post->ID, 'research_question', true ), $num_words = 20, $more = null ); ?> 
-					</p>
+					</div>
 				<?php else: ?>
 					<?php the_excerpt(); ?>
 				<?php endif; ?>
@@ -37,10 +38,15 @@ if( $post->post_type === 'references') {
 				<a class="more-link" href="<?php echo get_permalink($post->ID); ?>">Read more...</a></hr>
 			<?php else:?>
 				<?php if( $post->post_type === 'references'): ?>
-					Authors: 					
+					<div class="attribution">Authors: 					
 					<?php the_field('article-authors') ?>
+					</div>
+					<div class="research-question">
+					<?php echo wp_trim_words( get_post_meta( $post->ID, 'research_question', true ), $num_words = 20, $more = null ); ?> 
+					</div>
+				<?php else: ?>
+					<?php the_content(); ?>
 				<?php endif; ?>
-				<?php echo wp_trim_words( get_post_meta( $post->ID, 'research_question', true ), $num_words = 20, $more = null ); ?> 
 			<?php endif; ?>
 
 			<?php wp_link_pages('before=<div id="page-links">&after=</div>'); ?>
