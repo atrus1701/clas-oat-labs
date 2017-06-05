@@ -28,7 +28,7 @@ if( $post->post_type === 'references') {
 					Authors: 					
 					<?php the_field('article-authors') ?>
 					<p>
-					<?php echo wp_trim_words( get_the_excerpt( $post ), $num_words = 20, $more = null ); ?> 
+					<?php echo wp_trim_words( get_post_meta( $post->ID, 'research_question', true ), $num_words = 20, $more = null ); ?> 
 					</p>
 				<?php else: ?>
 					<?php the_excerpt(); ?>
@@ -40,7 +40,7 @@ if( $post->post_type === 'references') {
 					Authors: 					
 					<?php the_field('article-authors') ?>
 				<?php endif; ?>
-				<?php the_content(); ?>
+				<?php echo wp_trim_words( get_post_meta( $post->ID, 'research_question', true ), $num_words = 20, $more = null ); ?> 
 			<?php endif; ?>
 
 			<?php wp_link_pages('before=<div id="page-links">&after=</div>'); ?>
