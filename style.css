@@ -1,32 +1,10 @@
-
-	@font-face {
-		font-family: 'vtt';
-		src:url('fonts/vtt.eot?q3vs3z');
-		src:url('fonts/vtt.eot?#iefixq3vs3z') format('embedded-opentype'),
-			url('fonts/vtt.ttf?q3vs3z') format('truetype'),
-			url('fonts/vtt.woff?q3vs3z') format('woff'),
-			url('fonts/vtt.svg?q3vs3z#vtt') format('svg');
-		font-weight: normal;
-		font-style: normal;
-	}
-
-	.icon-button {
-		height:34px;
-		width:34px;
-		margin:auto;
-		text-align:center;
-		line-height:34px;
-		font-size:26px;
-
-		font-family: 'vtt' !important;
-		speak: none;
-		font-style: normal;
-		font-weight: normal;
-		font-variant: normal;
-		text-transform: none;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-	}
+/*
+Plugin Name: CLAS OAT Labs
+Description: This plugin includes VTT template files and CSS for CLAS OAT sites with specific custom post types, taxonomies and fields
+Version: 2.1.0
+Author: Alex Chapin
+Author URI: https://clas-pages.uncc.edu/oat
+*/
 
 
 @font-face {
@@ -40,7 +18,8 @@
     font-style: normal;
 }
 
-[class^="icon-"]:before, [class*=" icon-"]:before {
+
+[class^="labs-icon-"]:before, [class*=" labs-icon-"]:before {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'labs' !important;
     speak: none;
