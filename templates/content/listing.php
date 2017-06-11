@@ -19,18 +19,23 @@ if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 	$is_sf = true;
 }
 
-if ( is_tax() ) {
+if ( is_tax() && $post->post_type === 'references') {   
 	$term_slug = get_query_var( 'term' );
-	$taxname = get_query_var( 'taxonomy' );
+	$taxname = get_query_var( 'taxonomy' ); 
 	$term_link = site_url().$sf_id.$sf_term.$taxname.'='.$term_slug;
+	echo "searching...";
+	//echo "<script>document.location = '".$term_link."';</script>";
+	//header( "Location: $term_link" ) ;
 	wp_redirect( $term_link );
+	//print_r(sprintf( "%s secs (%s milliseconds)", date( "i:s", $diff = microtime(1) - $starting_time ), $diff ));
+	exit();
+} else if ( is_search() && $post->post_type === 'references' ) {
+	$search_term = urlencode(get_search_query());
+	$search_link = site_url().$sf_id.'_sf_s='.$search_term;
+	echo "searching...";
+	echo "<script>document.location = '".$search_link."';</script>";
+	//wp_redirect( $search_link );
 	exit;
-} else if ( is_search() ) {
-// 	$search_term = urlencode(get_search_query());
-// 	$search_link = site_url().$sf_id.'_sf_s='.$search_term;
-// 	wp_redirect( $search_link );
-// 	exit;
-
 
 } else {
 	//$current_url = add_query_arg( $_SERVER['QUERY_STRING'], '', home_url( $wp->request ) );
