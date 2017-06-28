@@ -5,14 +5,19 @@ $is_mt = false;
 $search_term = '';
 $sf_id = '';
 $sf_term = '_sft_';
-if ( site_url() === 'https://devsites.uncc.edu/diversityined') { 
+if ( site_url() === 'https://devsites.uncc.edu/spivack') { 
 	$sf_id = '/?sfid=1721&';
 	$sf_term = '_sft_';
-} else if ( site_url() === 'https://devclaspages.uncc.edu/labs') { 
-	$sf_id = '/?sfid=939&';
+} else if ( site_url() === 'https://devclas-pages.uncc.edu/labs' || 
+	site_url() === 'https://clas-pages.uncc.edu/labs') { 
+	$sf_id = '/?sfid=951&';
+	$sf_term = '_sft_';
+} else if ( site_url() === 'https://devclas-pages.uncc.edu/techne' ||
+	site_url() === 'https://clas-pages.uncc.edu/techne' ) { 
+	$sf_id = '/?sfid=1640&';
 	$sf_term = '_sft_';
 } else if ( site_url() === 'https://sites.uncc.edu/spivack') { 
-	$sf_id = '/?sfid=956&';
+	$sf_id = '/?sfid=1751&';
 	$sf_term = '_sft_';
 }
 
