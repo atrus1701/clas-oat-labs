@@ -3,9 +3,10 @@
 Plugin Name: CLAS OAT Labs
 Plugin URI: https://github.com/clas-web/clas-oat-labs
 Description: CLAS OAT Labs site custom plugin with custom template files.
-Version: 1.1
+Version: 1.2.0
 Author: Crystal Barton
 Author URI: http://www.crystalbarton.com
+GitHub Plugin URI: https://github.com/clas-web/clas-oat-labs
 */
 
 

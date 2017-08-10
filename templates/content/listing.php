@@ -14,7 +14,6 @@ if ( site_url() === 'https://clas-pages.uncc.edu/techne') {
 	$sf_term = '_sft_';
 } else if ( site_url() === 'https://k16diversity.uncc.edu') { 
 	$sf_id = '/?sfid=1721&';
-	$sf_term = '_sft_';
 }
 
 if( function_exists('mt_is_archive') && function_exists('mt_is_search') && 
@@ -42,9 +41,9 @@ if ( is_tax() && isset($sf_id) ) {
 } else if ( is_search() && isset($sf_id) ) {
 	$search_term = urlencode(get_search_query());
 	$search_link = site_url().$sf_id.'_sf_s='.$search_term;
-	echo "searching...";
-	echo "<script>document.location = '".$search_link."';</script>";
-	//wp_redirect( $search_link );
+	//echo "searching...";
+	//echo "<script>document.location = '".$search_link."';</script>";
+	wp_redirect( $search_link );
 	exit;
 
 } else {
