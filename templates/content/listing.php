@@ -4,8 +4,18 @@ global $wp_query, $wp, $post;
 $is_mt = false;
 $is_sf = false;
 $search_term = "";
-$sf_id = '/?sfid=1721&';
+$sf_id = '';
 $sf_term = '_sft_';
+if ( site_url() === 'https://clas-pages.uncc.edu/techne') { 
+	$sf_id = '/?sfid=1640&';
+	$sf_term = '_sft_';
+} else if ( site_url() === 'https://clas-pages.uncc.edu/labs') { 
+	$sf_id = '/?sfid=951&';
+	$sf_term = '_sft_';
+} else if ( site_url() === 'https://k16diversity.uncc.edu') { 
+	$sf_id = '/?sfid=1721&';
+	$sf_term = '_sft_';
+}
 
 if( function_exists('mt_is_archive') && function_exists('mt_is_search') && 
 	( mt_is_archive() || mt_is_search() ) )
@@ -19,17 +29,17 @@ if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 	$is_sf = true;
 }
 
-if ( is_tax() && $post->post_type === 'references') {   
+if ( is_tax() && isset($sf_id) ) {   
 	$term_slug = get_query_var( 'term' );
 	$taxname = get_query_var( 'taxonomy' ); 
 	$term_link = site_url().$sf_id.$sf_term.$taxname.'='.$term_slug;
-	echo "searching...";
-	//echo "<script>document.location = '".$term_link."';</script>";
+	echo "<div class='searching'>searching...</div>";
+	echo "<script>document.location = '".$term_link."';</script>";
 	//header( "Location: $term_link" ) ;
-	wp_redirect( $term_link );
+	//wp_redirect( $term_link );
 	//print_r(sprintf( "%s secs (%s milliseconds)", date( "i:s", $diff = microtime(1) - $starting_time ), $diff ));
 	exit();
-} else if ( is_search() && $post->post_type === 'references' ) {
+} else if ( is_search() && isset($sf_id) ) {
 	$search_term = urlencode(get_search_query());
 	$search_link = site_url().$sf_id.'_sf_s='.$search_term;
 	echo "searching...";
