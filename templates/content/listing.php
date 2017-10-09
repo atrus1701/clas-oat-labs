@@ -65,6 +65,7 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 	}
 	echo "<div class='searching'>searching...</div>";
 	echo "<script>document.location = '".$term_link."';</script>";
+	header( "Location: $term_link" );
 	//wp_redirect( $term_link );
 	exit();
 } else if ( is_search() && isset($_SESSION['sfid'] ) ){
