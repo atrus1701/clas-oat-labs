@@ -55,6 +55,7 @@ $is_mt = true;
 // if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 // 	$is_sf = true;
 // }
+//echo "</br>before url redirects...</br>";
 if ( is_tax() && isset($_SESSION['sfid'] ) ) {   
 	$term_slug = get_query_var( 'term' );
 	$taxname = get_query_var( 'taxonomy' );
@@ -65,9 +66,7 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 	echo "<div class='searching'>searching...</div>";
 	echo "<script>document.location = '".$term_link."';</script>";
 	//wp_redirect( $term_link );
-	//print_r(sprintf( "%s secs (%s milliseconds)", date( "i:s", $diff = microtime(1) - $starting_time ), $diff ));
 	exit();
-} else if ( is_search() && isset($sf_id) ) {
 } else if ( is_search() && isset($_SESSION['sfid'] ) ){
 	$search_term = urlencode(get_search_query());
 	$search_link = site_url().'/?sfid='.$_SESSION['sfid']."&".'_sf_s='.$search_term;
@@ -80,6 +79,7 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 	//wp_redirect( $search_link );
 	exit();
 }
+//echo "past url redirects...";
 ?>
 
 <div class="page-title">
