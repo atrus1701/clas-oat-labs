@@ -1,21 +1,35 @@
 <?php //vtt_print('default:content:listing'); ?>
 <?php
-global $wp_query, $wp, $post;
+global $wp_query, $wp, $post, $searchandfilter;
+
+//echo "</br>begin listing...</br>";
+if (!session_id()) {
+    session_start();
+}
+
 $is_mt = false;
 $is_sf = false;
 $search_term = "";
 $sf_id = '';
 $sf_term = '_sft_';
-if ( site_url() === 'https://clas-pages.uncc.edu/techne') { 
-	$sf_id = '/?sfid=1640&';
-	$sf_term = '_sft_';
-} else if ( site_url() === 'https://clas-pages.uncc.edu/labs') { 
-	$sf_id = '/?sfid=951&';
-	$sf_term = '_sft_';
-} else if ( site_url() === 'https://k16diversity.uncc.edu') { 
-	$sf_id = '/?sfid=1721&';
+//$archive = NULL;
+
+if ( isset($_GET['_sft_archive']) ) {
+	$_SESSION['sft_archive'] = $_GET['_sft_archive'];
 }
 
+if ( isset($_GET['sfid']) ) {
+	$_SESSION['sfid'] = $_GET['sfid'];
+// 	$sf_current_query = $searchandfilter->get($_SESSION['sfid'])->current_query();
+// 	$archive = $sf_current_query->get_field_string("_sft_archive");
+}
+
+if ( isset($_GET['_sft_']) ) {
+	unset($_SESSION['sft_archive']);
+	//unset($_SESSION['sfid']);
+}
+
+//print_r($_SESSION);
 if( function_exists('mt_is_archive') && function_exists('mt_is_search') && 
 	( mt_is_archive() || mt_is_search() ) )
 {
