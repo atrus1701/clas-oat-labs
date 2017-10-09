@@ -52,11 +52,9 @@ if( function_exists('mt_is_archive') && function_exists('mt_is_search') &&
 
 $is_mt = true;
 
-if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
-	$is_sf = true;
-}
-
-if ( is_tax() && isset($sf_id) ) {   
+// if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
+// 	$is_sf = true;
+// }
 	$term_slug = get_query_var( 'term' );
 	$taxname = get_query_var( 'taxonomy' ); 
 	$term_link = site_url().$sf_id.$sf_term.$taxname.'='.$term_slug;
