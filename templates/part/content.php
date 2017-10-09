@@ -2,12 +2,22 @@
 
 
 <?php
+global $searchandfilter;
+$sf_current_query = $searchandfilter->get($_SESSION['sfid'])->current_query();
+$sf_search_term = $sf_current_query->get_search_term();
+
+if ( isset ($sf_search_term) ) {
+	$search_term = $sf_search_term;
+} else {
+	$search_term = get_search_query();
+}
+
 $widgets = wp_get_sidebars_widgets();
 $class = '';
 $sidebar_count = 0;
 $use_left_sidebar = false;
 $use_right_sidebar = false;
-$search_term = get_search_query();
+
 
 if( array_key_exists('vtt-left-sidebar', $widgets) && count($widgets['vtt-left-sidebar']) ):
 	$use_left_sidebar = true;
