@@ -55,16 +55,17 @@ $is_mt = true;
 // if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 // 	$is_sf = true;
 // }
+if ( is_tax() && isset($_SESSION['sfid'] ) ) {   
 	$term_slug = get_query_var( 'term' );
 	$taxname = get_query_var( 'taxonomy' ); 
 	$term_link = site_url().$sf_id.$sf_term.$taxname.'='.$term_slug;
 	echo "<div class='searching'>searching...</div>";
 	echo "<script>document.location = '".$term_link."';</script>";
-	//header( "Location: $term_link" ) ;
 	//wp_redirect( $term_link );
 	//print_r(sprintf( "%s secs (%s milliseconds)", date( "i:s", $diff = microtime(1) - $starting_time ), $diff ));
 	exit();
 } else if ( is_search() && isset($sf_id) ) {
+} else if ( is_search() && isset($_SESSION['sfid'] ) ){
 	$search_term = urlencode(get_search_query());
 	$search_link = site_url().$sf_id.'_sf_s='.$search_term;
 	//echo "searching...";
