@@ -57,8 +57,11 @@ $is_mt = true;
 // }
 if ( is_tax() && isset($_SESSION['sfid'] ) ) {   
 	$term_slug = get_query_var( 'term' );
-	$taxname = get_query_var( 'taxonomy' ); 
-	$term_link = site_url().$sf_id.$sf_term.$taxname.'='.$term_slug;
+	$taxname = get_query_var( 'taxonomy' );
+	$term_link = site_url().'/?sfid='.$_SESSION['sfid']."&".$sf_term.$taxname.'='.$term_slug; 
+	if (isset($_SESSION['sft_archive'])) {
+		$term_link = $term_link.'&_sft_archive='.$_SESSION['sft_archive'];
+	}
 	echo "<div class='searching'>searching...</div>";
 	echo "<script>document.location = '".$term_link."';</script>";
 	//wp_redirect( $term_link );
@@ -67,16 +70,15 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 } else if ( is_search() && isset($sf_id) ) {
 } else if ( is_search() && isset($_SESSION['sfid'] ) ){
 	$search_term = urlencode(get_search_query());
-	$search_link = site_url().$sf_id.'_sf_s='.$search_term;
-	//echo "searching...";
-	//echo "<script>document.location = '".$search_link."';</script>";
-	wp_redirect( $search_link );
-	exit;
-
-} else {
-	//$current_url = add_query_arg( $_SERVER['QUERY_STRING'], '', home_url( $wp->request ) );
-	//echo $current_url
-	//exit;
+	$search_link = site_url().'/?sfid='.$_SESSION['sfid']."&".'_sf_s='.$search_term;
+	if (isset($_SESSION['sft_archive'])) {
+		$search_link = $search_link.'&_sft_archive='.$_SESSION['sft_archive'];
+	}
+	echo "searching...";
+	echo "<script>document.location = '".$search_link."';</script>";
+	header( "Location: $search_link" );
+	//wp_redirect( $search_link );
+	exit();
 }
 ?>
 
