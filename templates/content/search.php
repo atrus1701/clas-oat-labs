@@ -12,7 +12,11 @@ if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 	//$sf_filter_slug = '/?sfid=1724&_sft_';
 	$sf_filter_slug = '/?sfid='.$_GET['sfid'].'&_sft_';
 	$is_sfpage = true;
-	echo '<div class="found-posts">'.$wp_the_query->found_posts.' posts found.</div>';
+	if( $post->post_type === 'references') {
+		echo '<div class="found-posts">'.$wp_the_query->found_posts.' abstracts found.</div>';
+	} else {
+		echo '<div class="found-posts">'.$wp_the_query->found_posts.' posts found.</div>';
+	}
 //	echo '<div class="found-posts">'.$wp_the_query->query['paged'].' of '.$wp_the_query->max_num_pages.'</div>';
 	echo '<div class="current-filters">';
 	echo '<h4>Current Selections</h4>';
@@ -22,7 +26,6 @@ if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 	 	home_url();
 	}
 	echo '<a class="clear-filters" href="' . esc_attr( $clear_link ) . '" title="Clear Filters">Clear</a>';
-	
 	$sfid = (int)( $_GET['sfid'] );
 	$sf_inst = $searchandfilter->get( $sfid );
 	
