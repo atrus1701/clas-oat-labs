@@ -64,7 +64,7 @@ if( $post->post_type === 'references') {
 			</div>
 			<div class="ref-field">
 			<span class="ref-label ref-entry-label">Journal Entry:</span> 
-			<?php apply_filters(the_field('journal-entry')); ?>
+			<?php the_field('journal-entry'); ?>
 			</div>
 			<div class="ref-field">
 			<span class="ref-label ref-year-label">Year:</span> 
@@ -111,7 +111,7 @@ if( $post->post_type === 'references') {
 		<?php echo labs_get_taxonomy_terms('research-design', $post); ?>
 		<?php echo labs_get_taxonomy_terms('analysis-methods', $post); ?>
 		<span class="ref-label ref-frame-label">Sampling Frame:</span> 
-		<?php apply_filters(the_field('sampling_frame')); ?>
+		<?php the_field('sampling_frame'); ?>
 		</div>
 		<?php echo labs_get_taxonomy_terms('sampling-type', $post); ?>
 		<?php echo labs_get_taxonomy_terms('analysis-unit', $post); ?>
@@ -119,11 +119,11 @@ if( $post->post_type === 'references') {
 		
 		<div class="ref-field">
 		<div class="ref-label ref-published-label">Data Description:</div> 
-		<?php apply_filters(the_field('data_description')); ?>
+		<?php the_field('data_description'); ?>
 		</div>
 		<div class="ref-field">
 		<span class="ref-label ref-question-label">Relevance:</span> 
-		<?php apply_filters(the_field('relevance')); ?>
+		<?php the_field('relevance'); ?>
 		</div>
 
 							
