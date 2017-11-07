@@ -225,10 +225,14 @@ else:
 			<?php echo $number++.") ".$year." - ".$post->post_title; ?></a>
 		<?php else:?>
 			<?php echo $post->post_title; ?></a>
-		<?php endif; ?>
+		<?php endif ?>
 		</h2>
-	
-		<?php	
+		<?php 
+		if( $post->post_type === 'plants') {
+			echo "<div id='common-name'>";
+			echo the_terms( $post->ID, "common_names" );
+			echo "</div>";
+		}
 		vtt_get_template_part( 'listing', 'post', vtt_get_post_type(), $number );
 		echo '</div>';
 		//$number ++;
