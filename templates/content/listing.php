@@ -64,9 +64,9 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 		$term_link = $term_link.'&_sft_archive='.$_SESSION['sft_archive'];
 	}
 	echo "<div class='searching'>searching...</div>";
-	echo "<script>document.location = '".$term_link."';</script>";
-	header( "Location: $term_link" );
-	//wp_redirect( $term_link );
+//	echo "<script>document.location = '".$term_link."';</script>";
+//	header( "Location: $term_link" );
+	wp_redirect( $term_link );
 	exit();
 } else if ( is_search() && isset($_SESSION['sfid'] ) ){
 	$search_term = urlencode(get_search_query());
@@ -75,9 +75,9 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 		$search_link = $search_link.'&_sft_archive='.$_SESSION['sft_archive'];
 	}
 	echo "searching...";
-	echo "<script>document.location = '".$search_link."';</script>";
-	header( "Location: $search_link" );
-	//wp_redirect( $search_link );
+//	echo "<script>document.location = '".$search_link."';</script>";
+//	header( "Location: $search_link" );
+	wp_redirect( $search_link );
 	exit();
 }
 //echo "past url redirects...";
@@ -130,6 +130,7 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 					$filter_terms[] = $term;
 				}
 			}
+			
 		}
 	}
 	elseif( is_a( get_queried_object(), 'WP_Term' ) )
@@ -148,8 +149,7 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 	if( vtt_has_page_listing_name() )
 		echo '<div class="listing-name">'.vtt_get_page_listing_name().'</div>';
 	?>
-
-	<?php
+	<?php  
 	if( $is_mt )
 	{
 		
