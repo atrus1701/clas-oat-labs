@@ -1,6 +1,6 @@
 <?php //vtt_print('part:header'); ?>
 <?php
-global $vtt_config, $post;
+global $vtt_config, $post, $searchandfilter;
 
 
 // Check if the header should be the current post's featured image.
@@ -19,11 +19,25 @@ else
 // Get the header title position and contents.
 $position = $vtt_config->get_value( 'header-title-position' );
 $hide_title = $vtt_config->get_value( 'header-title-hide' );
-//if ( isset($_SESSION['sft_archive']) && isset($_GET['_sft_archive']) ) {
-//	$title = $_SESSION['sft_archive'];
-//} else {
+$archive = "";
+
+if ( isset($_SESSION['sfid']) ) {
+	$sf_current_query = $searchandfilter->get($_SESSION['sfid'])->current_query();
+	$archive = $sf_current_query->get_field_string("_sft_archive");
+}
+//print_r($archive);
+if ( isset($archive) ) {
+	if ($archive == 'Archive: K-16 STEM Abstracts') {
+		$title = 'K-16 STEM Archive';
+	} else if ($archive == 'Archive: K-12 Integration, Desegregation, and Segregation Abstracts') {
+		$title = '<div style="display: inline-block; font-size: .9em; line-height: 1.2em;">K-12 Integration, Desegregation, and Segregation Archive</div>';
+	} else {
+		$title = get_option( 'blogname' );
+	}
+} else {
 	$title = get_option( 'blogname' );
-//}
+}
+
 
 $title_link_default = $vtt_config->get_value( 'blogname_url_default' );
 $description = get_option( 'blogdescription' );
