@@ -14,6 +14,11 @@ if( $post->post_type === 'references') {
 	<div class="breadcrumbs"><?php echo vtt_get_breadcrumbs( $post ); ?></div>
 	<?php if( $post->post_type === 'references'): ?>
 		<?php echo '<h1>'.$year." - ".vtt_get_page_title().'</h1>'; ?>
+	<?php elseif( $post->post_type === 'plants'): ?>
+		<?php echo '<h1>'.vtt_get_page_title().'</h1>'; ?>
+		<?php echo "<div id='common-name'>"; ?>
+		<?php echo the_terms( $post->ID, "common_names" ); ?>
+		<?php echo "</div>"; ?>	
 	<?php else:?>	
 		<?php echo '<h1>'.vtt_get_page_title().'</h1>'; ?>
 	<?php endif; ?>
