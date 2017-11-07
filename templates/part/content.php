@@ -3,14 +3,18 @@
 
 <?php
 global $searchandfilter;
-$sf_current_query = $searchandfilter->get($_SESSION['sfid'])->current_query();
-$sf_search_term = $sf_current_query->get_search_term();
+
+if (isset($searchandfilter) && isset($_SESSION['sfid']) ) {
+	$sf_current_query = $searchandfilter->get($_SESSION['sfid'])->current_query();
+	$sf_search_term = $sf_current_query->get_search_term();
+}
 
 if ( isset ($sf_search_term) ) {
 	$search_term = $sf_search_term;
 } else {
 	$search_term = get_search_query();
 }
+
 
 $widgets = wp_get_sidebars_widgets();
 $class = '';
