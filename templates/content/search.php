@@ -11,6 +11,7 @@ $sf_descriptions = array();
 if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 	//$sf_filter_slug = '/?sfid=1724&_sft_';
 	$sf_filter_slug = '/?sfid='.$_GET['sfid'].'&_sft_';
+	$sf_clear_slug = '/?sfid='.$_GET['sfid'];
 	$is_sfpage = true;
 	if( $post->post_type === 'references') {
 		echo '<div class="found-posts">'.$wp_the_query->found_posts.' abstracts found.</div>';
@@ -21,7 +22,8 @@ if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 	echo '<div class="current-filters">';
 	echo '<h4>Current Selections</h4>';
 	if( $post->post_type === 'references') {
-		$clear_link = home_url().$sf_filter_slug;
+		$sf_archive_slug = '&_sft_archive='.$_SESSION['sft_archive'];
+		$clear_link = home_url().$sf_clear_slug.$sf_archive_slug;
 	} else {
 	 	home_url();
 	}
@@ -55,7 +57,7 @@ if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 				echo labs_get_taxonomy_breadcrumbs( $term->term_id, $taxname );
 				
 				if( $post->post_type === 'references') {
-					$term_link = site_url().$sf_filter_slug.$taxname.'='.$term_slug;
+					$term_link = site_url().$sf_filter_slug.$taxname.'='.$term_slug.$sf_archive_slug;
 					echo '<a href="' . $term_link . '" title="' . esc_attr( $term->name ) . '">' . $term->name . '</a>';
 				} else {				
 					echo '<a href="' . esc_attr( get_term_link( $term, $taxname ) ) . '" title="' . esc_attr( $term->name ) . '">' . $term->name . '</a>';			
