@@ -31,19 +31,6 @@ if ( isset($_GET['_sft_']) ) {
 
 //print_r($_SESSION);
 
-// if ( site_url() === 'https://clas-pages.uncc.edu/techne') { 
-// 	$sf_id = '/?sfid=1640&';
-// 	$sf_term = '_sft_';
-// } else if ( site_url() === 'https://clas-pages.uncc.edu/labs') { 
-// 	$sf_id = '/?sfid=951&';
-// 	$sf_term = '_sft_';
-// } else if ( site_url() === 'https://k16diversity.uncc.edu') { 
-// 	$sf_id = '/?sfid=1721&';
-// } else if ( site_url() === 'https://devsites.uncc.edu/spivack') { 
-// 	$sf_id = '/?sfid=1721&';
-// 	$sf_term = '_sft_';
-// }
-
 if( function_exists('mt_is_archive') && function_exists('mt_is_search') && 
 	( mt_is_archive() || mt_is_search() ) )
 {
@@ -64,8 +51,6 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 		$term_link = $term_link.'&_sft_archive='.$_SESSION['sft_archive'];
 	}
 	echo "<div class='searching'>searching...</div>";
-//	echo "<script>document.location = '".$term_link."';</script>";
-//	header( "Location: $term_link" );
 	wp_redirect( $term_link );
 	exit();
 } else if ( is_search() && isset($_SESSION['sfid'] ) ){
@@ -75,8 +60,6 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 		$search_link = $search_link.'&_sft_archive='.$_SESSION['sft_archive'];
 	}
 	echo "searching...";
-//	echo "<script>document.location = '".$search_link."';</script>";
-//	header( "Location: $search_link" );
 	wp_redirect( $search_link );
 	exit();
 }
