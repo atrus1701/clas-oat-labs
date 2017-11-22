@@ -50,7 +50,7 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 	if (isset($_SESSION['sft_archive'])) {
 		$term_link = $term_link.'&_sft_archive='.$_SESSION['sft_archive'];
 	}
-	echo "<div class='searching'>searching...</div>";
+	//echo "<div class='searching'>searching...</div>";
 	wp_redirect( $term_link );
 	exit();
 } else if ( is_search() && isset($_SESSION['sfid'] ) ){
@@ -59,7 +59,7 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 	if (isset($_SESSION['sft_archive'])) {
 		$search_link = $search_link.'&_sft_archive='.$_SESSION['sft_archive'];
 	}
-	echo "searching...";
+	//echo "searching...";
 	wp_redirect( $search_link );
 	exit();
 }
