@@ -1,6 +1,5 @@
 <?php //vtt_print('default:content:search'); ?>
 
-
 <?php
 
 global $searchandfilter, $wp_the_query, $post;
@@ -11,9 +10,12 @@ $sf_descriptions = array();
 if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 	//$sf_filter_slug = '/?sfid=1724&_sft_';
 	$sf_filter_slug = '/?sfid='.$_GET['sfid'].'&_sft_';
+	$sf_id = $_GET['sfid'];
 	$sf_clear_slug = '/?sfid='.$_GET['sfid'];
 	$is_sfpage = true;
 	if( $post->post_type === 'references') {
+		echo "<div class='sf-search-sort'>".do_shortcode('[searchandfilter id="'.$sf_id.'"]')."</div>";
+		//if(function_exists('pf_show_link')){echo pf_show_link();}
 		echo '<div class="found-posts">'.$wp_the_query->found_posts.' abstracts found.</div>';
 	} else {
 		echo '<div class="found-posts">'.$wp_the_query->found_posts.' posts found.</div>';
@@ -89,7 +91,7 @@ if( have_posts() ):
 
 	?>
 	<div class="page-title">
-	<?php echo '<h1>' . implode( ' / ', $sf_names ) . '</h1>'; ?>
+	<?php echo '<div class="sf-search-title">' . implode( ' / ', $sf_names ) . '</div>'; ?>
 	</div>
 	<?php
 	
@@ -117,7 +119,7 @@ else:
 		echo '<div class="listing-name">'.vtt_get_page_listing_name().'</div>';
 
 	if( $is_sfpage ) {
-		echo '<h1>' . implode( ' / ', $sf_names ) . '</h1>';
+		echo '<div class="sf-search-title">' . implode( ' / ', $sf_names ) . '</div>';
 	} else { 
 		echo '<h1>'.vtt_get_page_title().'</h1>';
 	}
@@ -140,7 +142,7 @@ else:
 	if( $is_sfpage ) {
 	
 		?>
-		<p>No posts found that matched the current selections.  Try removing a keyword from the selections to get better results.</p>
+		<p>No posts found that matched the current selections.</p>
 		<?php
 		
 	} else {
