@@ -29,6 +29,7 @@ if( $post->post_type === 'references') {
 					<?php the_field('article-authors') ?>
 					</div>
 					<div class="research-question">
+					<?php //echo the_excerpt() ?>
 					<?php echo wp_trim_words( get_post_meta( $post->ID, 'research_question', true ), $num_words = 20, $more = null ); ?> 
 					</div>
 				<?php else: ?>
