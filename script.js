@@ -58,6 +58,14 @@ jQuery( document ).ready(function() {
 // 				}
 // 			});
 // 		}
+
+
+// 	jQuery(".sf-field-taxonomy-keyword").click( function() {
+// 		jQuery("#search-filter-form-1721").submit();
+//	});
+
+// 	jQuery(".sf-input-select").change( function() {
+// 		jQuery("#search-filter-form-1721").submit();
 // 	});
 
 	jQuery( 'li[data-sf-field-input-type="checkbox"] li.sf-level-0' ).each( function() {
