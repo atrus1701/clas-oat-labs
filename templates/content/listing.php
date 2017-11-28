@@ -160,7 +160,7 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 		else {
 			if( isset( $_GET ) && isset( $_GET['_sf_s'] ) ) {
 				if (isset($search_term)) {
-					echo '<h1>Filtered Search Results: "'.$_GET['_sf_s'].'"</h1>';
+					echo '<div class="sf-results-description">Filtered Search Results: "'.$_GET['_sf_s'].'"</div>';
 				}
 			}
 		}
