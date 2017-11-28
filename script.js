@@ -12,7 +12,7 @@ jQuery( document ).ready(function() {
 // 		jQuery( this ).find( 'a' ).wrapAll( '<div class="results-list"/>' );
 // 	});		
 // 		
-//	jQuery( '.multi-tax-browser-control .related-taxonomies .results .results-list' ).hide();
+// 	jQuery( '.multi-tax-browser-control .related-taxonomies .results .results-list' ).hide();
 // 	jQuery( '.multi-tax-browser-control .related-taxonomies .results > .title' ).addClass( 'show' );
 // 	jQuery( '.multi-tax-browser-control .related-taxonomies .results > .title' ).click( function() {
 // 		if( jQuery(this).hasClass( 'show' ) ) {
@@ -68,6 +68,7 @@ jQuery( document ).ready(function() {
 // 		jQuery("#search-filter-form-1721").submit();
 // 	});
 
+
 	jQuery( 'li[data-sf-field-input-type="checkbox"] li.sf-level-0' ).each( function() {
 		var checkbox = jQuery( this ).children( '.sf-input-checkbox' );
 		jQuery( checkbox ).hide();
@@ -92,6 +93,6 @@ jQuery( document ).ready(function() {
 				jQuery( label ).removeClass( 'checked' );
 			}
 		});
-	});
+	});	
 });
 
