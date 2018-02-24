@@ -45,6 +45,39 @@ add_action( 'vtt-search-folders', 'labs_variations_add_variations_folder' );
 add_action( 'wp_head', 'labs_wp_head' );
 
 /**
+ * Get currently filtered taxonomies and post types.
+ * @return  Array  The filtered taxonomies and post types.
+ */
+function labs_get_current_filter_data()
+{
+		$data = array(
+			'post_types' => array(),
+			'taxonomies' => array(),
+		);
+		
+		if( !is_archive() && !is_search() ) return $data;
+		
+		
+		$qo = get_queried_object();
+		if( $qo != null )
+		{
+			if( is_category() || is_tag() || is_tax() )
+			{
+				$data['taxonomies'][$qo->taxonomy] = array( $qo->slug );
+			}
+		}
+		
+		foreach( $data['taxonomies'] as $taxname => &$terms )
+		{
+			$terms = array_unique($terms);
+		}
+		
+		
+		return $data;
+}
+
+
+/**
  * 
  */
 function labs_get_anchor( $url, $title, $class = null, $contents = null )

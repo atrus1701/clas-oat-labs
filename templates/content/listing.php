@@ -80,9 +80,7 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 		$filter_terms = array();
 		
 		// current_filters = currently filtered taxonomies and post types
-		// This is determinded from a Multi-taxonomy Browser plugin function
-		// 
-		$current_filters = mt_get_current_filter_data();
+		$current_filters = labs_get_current_filter_data();
 		foreach( $current_filters['taxonomies'] as $taxname => $terms )
 		{
 			$taxonomy = get_taxonomy( $taxname );
@@ -186,7 +184,7 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 
 
 <?php
-if( $is_mt && count( $filter_terms ) > 0 ) {
+if( count( $filter_terms ) > 0 ) {
 	foreach( $filter_terms as $term ) {
 		echo '<div class="description">' . apply_filters( 'term_description', $term->description ) . '</div>';
 	}
