@@ -35,20 +35,8 @@ if ( isset($_GET['_sft_']) ) {
 	//unset($_SESSION['sfid']);
 }
 
-//print_r($_SESSION);
+print_r($_SESSION);
 
-// if( function_exists('mt_is_archive') && function_exists('mt_is_search') && 
-// 	( mt_is_archive() || mt_is_search() ) )
-// {
-// 	$is_mt = true;
-// }
-
-// $is_mt = true;
-
-// if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
-// 	$is_sf = true;
-// }
-//echo "</br>before url redirects...</br>";
 if ( is_tax() && isset($_SESSION['sfid'] ) ) {   
 	$term_slug = get_query_var( 'term' );
 	$taxname = get_query_var( 'taxonomy' );
@@ -74,111 +62,68 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 
 <div class="page-title">
 	
-	<?php
-// 	if( $is_mt )
-// 	{
-		$filter_terms = array();
-		
-		// current_filters = currently filtered taxonomies and post types
-		$current_filters = labs_get_current_filter_data();
-		foreach( $current_filters['taxonomies'] as $taxname => $terms )
-		{
-			$taxonomy = get_taxonomy( $taxname );
-			foreach( $terms as $term_slug )
-			{
-				$term = get_term_by( 'slug', $term_slug, $taxname );
-				$link = labs_get_anchor(
-					get_term_link( $term, $taxname ),
-					$term->name,
-					null,
-					$term->name
-				);
-								
-				if( $post->post_type === 'references') {					
-					$term_link = site_url().$sf_filter_slug.$taxname.'='.$term_slug;
-					$title = $term->name;
-					$content = $term->name;
-					$link = labs_get_anchor(
-						$term_link,
-						$term->name,
-						null,
-						$term->name
-					);				
-				
-				}
-							
-				if( $term ) {
-					$post_count = $wp_query->found_posts;
-					echo '<div class="found-posts">'.$post_count.' posts found</div>';
-				//	echo '<div class="current-filters"><h4>Current Selection</h4></div>';
-					echo '<div class="breadcrumbs">' .
-						$taxonomy->label .
-						' &raquo; ' .
- 						vtt_get_taxonomy_breadcrumbs( $term->term_id, $taxname ) .
- 						$link .
-						'</div>';
+<?php
+$filter_terms = array();
+
+// current_filters = currently filtered taxonomies and post types
+$current_filters = labs_get_current_filter_data();
+foreach( $current_filters['taxonomies'] as $taxname => $terms )
+{
+	$taxonomy = get_taxonomy( $taxname );
+	foreach( $terms as $term_slug )
+	{
+		$term = get_term_by( 'slug', $term_slug, $taxname );
+		$link = labs_get_anchor(
+			get_term_link( $term, $taxname ),
+			$term->name,
+			null,
+			$term->name
+		);
 						
-					$filter_terms[] = $term;
-				}
-			}
-			
-		}
-// 	}
-// 	elseif( is_a( get_queried_object(), 'WP_Term' ) )
-// 	{
-// 		$qo = get_queried_object();
-// 		$post_count = $wp_query->found_posts;
-// 		echo '<div class="found-posts">'.$post_count.' posts found</div>';
-// 		echo '<div class="breadcrumbs">' .
-// 			vtt_get_taxonomy_breadcrumbs( $qo->term_id, $qo->taxonomy ) .
-// 			'</div>';
-// 
-// 	}
-	?>
-	
-	<?php
-	if( vtt_has_page_listing_name() )
-		echo '<div class="listing-name">'.vtt_get_page_listing_name().'</div>';
-	?>
-	<?php  
-// 	if( $is_mt )
-// 	{
+		if( $post->post_type === 'references') {					
+			$term_link = site_url().$sf_filter_slug.$taxname.'='.$term_slug;
+			$title = $term->name;
+			$content = $term->name;
+			$link = labs_get_anchor(
+				$term_link,
+				$term->name,
+				null,
+				$term->name
+			);				
 		
-	if( count( $filter_terms ) > 0 ) {
-		$term_names = array();
-		foreach( $filter_terms as $term ) {
-			$term_names[] = $term->name;
 		}
-		echo '<h1>';
-		echo implode( ' / ', $term_names );
-		echo '</h1>';
+					
+		if( $term ) {
+			$post_count = $wp_query->found_posts;
+			echo '<div class="found-posts">'.$post_count.' posts found</div>';
+		//	echo '<div class="current-filters"><h4>Current Selection</h4></div>';
+			echo '<div class="breadcrumbs">' .
+				$taxonomy->label .
+				' &raquo; ' .
+				vtt_get_taxonomy_breadcrumbs( $term->term_id, $taxname ) .
+				$link .
+				'</div>';
+				
+			$filter_terms[] = $term;
+		}
 	}
-// 	elseif( mt_is_filtered_archive() ) {
-// 		echo '<h1>Filtered Results</h1>';
-// 	}
-// 	elseif( mt_is_combined_archive() ) {
-// 		echo '<h1>Combined Results</h1>';
-// 	}
-// 	elseif( mt_is_filtered_search() ) {
-// 		echo '<h1>Filtered Search Results</h1>';
-// 	}
-// 	elseif( mt_is_combined_search() ) {
-// 		echo '<h1>Combined Search Results</h1>';
-// 	}
-// 	else {
-// 		if( isset( $_GET ) && isset( $_GET['_sf_s'] ) ) {
-// 			if (isset($search_term)) {
-// 				echo '<div class="sf-results-description">Filtered Search Results: "'.$_GET['_sf_s'].'"</div>';
-// 			}
-// 		}
-//	}
-		
-//	}
-// 	elseif( !is_home() )
-// 	{
-// 		echo '<h1>'.vtt_get_page_title().'</h1>';
-// 	}
-	?>
+	
+}
+
+if( vtt_has_page_listing_name() )
+	echo '<div class="listing-name">'.vtt_get_page_listing_name().'</div>';
+
+if( count( $filter_terms ) > 0 ) {
+	$term_names = array();
+	foreach( $filter_terms as $term ) {
+		$term_names[] = $term->name;
+	}
+	echo '<h1>';
+	echo implode( ' / ', $term_names );
+	echo '</h1>';
+}
+
+?>
 
 </div>
 
