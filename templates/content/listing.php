@@ -35,7 +35,7 @@ if ( isset($_GET['_sft_']) ) {
 	//unset($_SESSION['sfid']);
 }
 
-print_r($_SESSION);
+//print_r($_SESSION);
 
 if ( is_tax() && isset($_SESSION['sfid'] ) ) {   
 	$term_slug = get_query_var( 'term' );
@@ -141,11 +141,11 @@ elseif( vtt_has_page_description() ) {
 
 
 <?php
-if( !have_posts() ):
+if( !have_posts() ) {
 
 	echo '<p>No posts.</p>';
 
-else:
+} else {
 	
 	$number = 1;
 	while( have_posts() ):
@@ -157,14 +157,16 @@ else:
 		<div <?php post_class(); ?>>
 
 		<h2 class="entry-title"><a href="<?php echo get_permalink($post->ID); ?>">
-		<?php if( $post->post_type === 'references'): ?>
-			<?php echo $number++.") ".$year." - ".$post->post_title; ?></a>
-		<?php else:?>
-			<?php echo $post->post_title; ?></a>
-		<?php endif ?>
-		</h2>
 		<?php 
-		if( $post->post_type === 'plants') {
+		
+		if( $post->post_type === 'references') { 
+			echo $number++.") ".$year." - ".$post->post_title."</a>";		
+		} else {
+			echo $post->post_title."</a>";
+		}
+		
+		echo "</h2>";
+
 			echo "<div id='common-name'>";
 			echo the_terms( $post->ID, "common_names" );
 			echo " (Location: ";
@@ -181,6 +183,6 @@ else:
  
 	vtt_get_template_part( 'pagination', 'other', vtt_get_queried_object_type() );
 
-endif;
+};
 ?>
 
