@@ -17,6 +17,8 @@ if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 		echo "<div class='sf-search-sort'>".do_shortcode('[searchandfilter id="'.$sf_id.'"]')."</div>";
 		//if(function_exists('pf_show_link')){echo pf_show_link();}
 		echo '<div class="found-posts">'.$wp_the_query->found_posts.' abstracts found.</div>';
+	} else if( $post->post_type === 'plants') {
+		echo '<div class="found-posts">'.$wp_the_query->found_posts.' plants found.</div>';
 	} else {
 		echo '<div class="found-posts">'.$wp_the_query->found_posts.' posts found.</div>';
 	}
