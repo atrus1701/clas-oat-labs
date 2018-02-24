@@ -7,16 +7,22 @@ if (!session_id()) {
     session_start();
 }
 
-$is_mt = false;
+$is_mt = true;
 $is_sf = false;
 $search_term = "";
 $sf_id = '';
 $sf_term = '_sft_';
 //$archive = NULL;
 
+// if there is a taxonomy term = archive then set session variable
+// this prevents the archive term from being cleared when using the clear button
+// this is only used with post type = reference
+// sites with reference post type (i.e. k12-diversity) have two distinct archives
+// that users usually only want to search separately
 if ( isset($_GET['_sft_archive']) ) {
 	$_SESSION['sft_archive'] = $_GET['_sft_archive'];
 }
+
 
 if ( isset($_GET['sfid']) ) {
 	$_SESSION['sfid'] = $_GET['sfid'];
@@ -31,13 +37,13 @@ if ( isset($_GET['_sft_']) ) {
 
 //print_r($_SESSION);
 
-if( function_exists('mt_is_archive') && function_exists('mt_is_search') && 
-	( mt_is_archive() || mt_is_search() ) )
-{
-	$is_mt = true;
-}
+// if( function_exists('mt_is_archive') && function_exists('mt_is_search') && 
+// 	( mt_is_archive() || mt_is_search() ) )
+// {
+// 	$is_mt = true;
+// }
 
-$is_mt = true;
+// $is_mt = true;
 
 // if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 // 	$is_sf = true;
@@ -69,9 +75,13 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 <div class="page-title">
 	
 	<?php
-	if( $is_mt )
-	{
+// 	if( $is_mt )
+// 	{
 		$filter_terms = array();
+		
+		// current_filters = currently filtered taxonomies and post types
+		// This is determinded from a Multi-taxonomy Browser plugin function
+		// 
 		$current_filters = mt_get_current_filter_data();
 		foreach( $current_filters['taxonomies'] as $taxname => $terms )
 		{
@@ -115,17 +125,17 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 			}
 			
 		}
-	}
-	elseif( is_a( get_queried_object(), 'WP_Term' ) )
-	{
-		$qo = get_queried_object();
-		$post_count = $wp_query->found_posts;
-		echo '<div class="found-posts">'.$post_count.' posts found</div>';
-		echo '<div class="breadcrumbs">' .
-			vtt_get_taxonomy_breadcrumbs( $qo->term_id, $qo->taxonomy ) .
-			'</div>';
-
-	}
+// 	}
+// 	elseif( is_a( get_queried_object(), 'WP_Term' ) )
+// 	{
+// 		$qo = get_queried_object();
+// 		$post_count = $wp_query->found_posts;
+// 		echo '<div class="found-posts">'.$post_count.' posts found</div>';
+// 		echo '<div class="breadcrumbs">' .
+// 			vtt_get_taxonomy_breadcrumbs( $qo->term_id, $qo->taxonomy ) .
+// 			'</div>';
+// 
+// 	}
 	?>
 	
 	<?php
@@ -133,43 +143,43 @@ if ( is_tax() && isset($_SESSION['sfid'] ) ) {
 		echo '<div class="listing-name">'.vtt_get_page_listing_name().'</div>';
 	?>
 	<?php  
-	if( $is_mt )
-	{
+// 	if( $is_mt )
+// 	{
 		
-		if( count( $filter_terms ) > 0 ) {
-			$term_names = array();
-			foreach( $filter_terms as $term ) {
-				$term_names[] = $term->name;
-			}
-			echo '<h1>';
-			echo implode( ' / ', $term_names );
-			echo '</h1>';
+	if( count( $filter_terms ) > 0 ) {
+		$term_names = array();
+		foreach( $filter_terms as $term ) {
+			$term_names[] = $term->name;
 		}
-		elseif( mt_is_filtered_archive() ) {
-			echo '<h1>Filtered Results</h1>';
-		}
-		elseif( mt_is_combined_archive() ) {
-			echo '<h1>Combined Results</h1>';
-		}
-		elseif( mt_is_filtered_search() ) {
-			echo '<h1>Filtered Search Results</h1>';
-		}
-		elseif( mt_is_combined_search() ) {
-			echo '<h1>Combined Search Results</h1>';
-		}
-		else {
-			if( isset( $_GET ) && isset( $_GET['_sf_s'] ) ) {
-				if (isset($search_term)) {
-					echo '<div class="sf-results-description">Filtered Search Results: "'.$_GET['_sf_s'].'"</div>';
-				}
-			}
-		}
+		echo '<h1>';
+		echo implode( ' / ', $term_names );
+		echo '</h1>';
+	}
+// 	elseif( mt_is_filtered_archive() ) {
+// 		echo '<h1>Filtered Results</h1>';
+// 	}
+// 	elseif( mt_is_combined_archive() ) {
+// 		echo '<h1>Combined Results</h1>';
+// 	}
+// 	elseif( mt_is_filtered_search() ) {
+// 		echo '<h1>Filtered Search Results</h1>';
+// 	}
+// 	elseif( mt_is_combined_search() ) {
+// 		echo '<h1>Combined Search Results</h1>';
+// 	}
+// 	else {
+// 		if( isset( $_GET ) && isset( $_GET['_sf_s'] ) ) {
+// 			if (isset($search_term)) {
+// 				echo '<div class="sf-results-description">Filtered Search Results: "'.$_GET['_sf_s'].'"</div>';
+// 			}
+// 		}
+//	}
 		
-	}
-	elseif( !is_home() )
-	{
-		echo '<h1>'.vtt_get_page_title().'</h1>';
-	}
+//	}
+// 	elseif( !is_home() )
+// 	{
+// 		echo '<h1>'.vtt_get_page_title().'</h1>';
+// 	}
 	?>
 
 </div>
