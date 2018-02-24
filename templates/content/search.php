@@ -29,7 +29,7 @@ if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 		$sf_archive_slug = '&_sft_archive='.$_SESSION['sft_archive'];
 		$clear_link = home_url().$sf_clear_slug.$sf_archive_slug;
 	} else {
-	 	home_url();
+	 	$clear_link = home_url().$sf_clear_slug;
 	}
 	echo '<a class="clear-filters" href="' . esc_attr( $clear_link ) . '" title="Clear Filters">Clear</a>';
 	$sfid = (int)( $_GET['sfid'] );
