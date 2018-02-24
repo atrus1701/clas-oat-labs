@@ -25,6 +25,65 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+div.plants-table {
+  border: 1px solid #CCCCCC;
+  background-color: #FFFFFF;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+.divTable.plants-table .divTableCell, .divTable.plants-table .divTableHead {
+  border: 1px solid #AAAAAA;
+  padding: 3px 2px;
+}
+.divTable.plants-table .divTableBody .divTableCell {
+  font-size: 13px;
+}
+.divTable.plants-table .divTableRow:nth-child(even) {
+  background: #E8E8E8;
+}
+.divTable.plants-table .divTableHeading {
+  background: #D3D3D3;
+  border-bottom: 1px solid #444444;
+}
+.divTable.plants-table .divTableHeading .divTableHead {
+  font-size: 15px;
+  font-weight: bold;
+  color: #111111;
+  border-left: 1px solid #CCCCCC;
+}
+.divTable.plants-table .divTableHeading .divTableHead:first-child {
+  border-left: none;
+}
+
+.plants-table .tableFootStyle {
+  font-size: 14px;
+}
+.plants-table .tableFootStyle .links {
+	 text-align: right;
+}
+.plants-table .tableFootStyle .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+.plants-table.outerTableFooter {
+  border-top: none;
+}
+.plants-table.outerTableFooter .tableFootStyle {
+  padding: 3px 5px; 
+}
+/* DivTable.com */
+.divTable{ display: table; }
+.divTableRow { display: table-row; }
+.divTableHeading { display: table-header-group;}
+.divTableCell, .divTableHead { display: table-cell;}
+.divTableHeading { display: table-header-group;}
+.divTableFoot { display: table-footer-group;}
+.divTableBody { display: table-row-group;}
+
 .labs-icon-times:before {
     content: "\f00d";
 }

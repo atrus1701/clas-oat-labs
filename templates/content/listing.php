@@ -148,25 +148,57 @@ if( !have_posts() ) {
 } else {
 	
 	$number = 1;
+	// print out header for Harwood site			
+	if( $post->post_type === 'plants' && is_object(get_taxonomy( 'genus')) ) { 
+	?>
+		<div class="divTable plants-table">
+		<div class="divTableHeading">
+		<div class="divTableRow">
+		<div class="divTableHead">Botanical Name</div>
+		<div class="divTableHead">Location</div>
+		<div class="divTableHead">Common Name</div>
+		</div>
+		</div>
+		<div class="divTableBody">	
+	<?php 
+	} 
+	
 	while( have_posts() ):
 		the_post();
 		if( $post->post_type === 'references') {
 			$year = labs_get_acf_select_value( 'publication_year' );
 		}
+		
+		if( $post->post_type != 'plants' || !is_object(get_taxonomy( 'genus')) ) {
 		?>
 		<div <?php post_class(); ?>>
-
-		<h2 class="entry-title"><a href="<?php echo get_permalink($post->ID); ?>">
 		<?php 
-		
-		if( $post->post_type === 'references') { 
-			echo $number++.") ".$year." - ".$post->post_title."</a>";		
-		} else {
-			echo $post->post_title."</a>";
 		}
+				
+		// print out title, taxonomy and field data for k16-diversity site
+		if( $post->post_type === 'references') { 
+			echo "<h2 class='entry-title'><a href=".get_permalink($post->ID).">";			
+			echo $number++.") ".$year." - ".$post->post_title."</a></h2>";
+			echo '</div>';
 		
-		echo "</h2>";
-
+		// print out title, taxonomy and field data for Harwood site			
+		} else if( $post->post_type === 'plants' && is_object(get_taxonomy( 'genus')) ) { 
+			echo "<div class='divTableRow'>";
+			echo "<div class='divTableCell'>";
+			echo "<a href=".get_permalink($post->ID).">".$post->post_title."</a>";
+			echo "</div>";
+			echo "<div class='divTableCell'>";
+			echo the_terms( $post->ID, "locations" );
+			echo "</div>";
+			echo "<div class='divTableCell'>";
+			echo the_terms( $post->ID, "common_names" );
+			echo "</div>";
+			echo "</div>";		
+		
+		// print out title, taxonomy and field data for Glen site	
+		} else if( $post->post_type === 'plants' ) {
+			echo "<h2 class='entry-title'><a href=".get_permalink($post->ID).">";
+			echo $post->post_title."</a></h2>";
 			echo "<div id='common-name'>";
 			echo the_terms( $post->ID, "common_names" );
 			echo " (Location: ";
@@ -174,13 +206,25 @@ if( !have_posts() ) {
 			echo " ";
 			echo the_terms( $post->ID, "directions" );
 			echo ")";
+			echo "</h2>";
 			echo "</div>";
+		} else {
+			echo "<h2 class='entry-title'><a href=".get_permalink($post->ID).">";
+			echo $post->post_title."</a></h2>";
+			echo '</div>';
+		}		
+		
+		if( $post->post_type != 'plants' || !is_object(get_taxonomy( 'genus')) ) {
+			vtt_get_template_part( 'listing', 'post', vtt_get_post_type(), $number );
 		}
-		vtt_get_template_part( 'listing', 'post', vtt_get_post_type(), $number );
-		echo '</div>';
+		
 		//$number ++;
 	endwhile;
- 
+	
+	if( $post->post_type === 'plants' && is_object(get_taxonomy( 'genus')) ) { 
+		echo "</div></div>";
+	}
+
 	vtt_get_template_part( 'pagination', 'other', vtt_get_queried_object_type() );
 
 };
