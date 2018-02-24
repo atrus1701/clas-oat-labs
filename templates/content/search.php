@@ -13,6 +13,8 @@ if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 	$sf_id = $_GET['sfid'];
 	$sf_clear_slug = '/?sfid='.$_GET['sfid'];
 	$is_sfpage = true;
+	
+	// print out label for post type for use in display of # of posts found
 	if( $post->post_type === 'references') {
 		echo "<div class='sf-search-sort'>".do_shortcode('[searchandfilter id="'.$sf_id.'"]')."</div>";
 		//if(function_exists('pf_show_link')){echo pf_show_link();}
@@ -23,8 +25,13 @@ if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 		echo '<div class="found-posts">'.$wp_the_query->found_posts.' posts found.</div>';
 	}
 //	echo '<div class="found-posts">'.$wp_the_query->query['paged'].' of '.$wp_the_query->max_num_pages.'</div>';
+	
+	// print out list of current filters
 	echo '<div class="current-filters">';
 	echo '<h4>Current Selections</h4>';
+	
+	// URL for clear button
+	// references post types (k16-diversity) do not clear the archive taxonomy term
 	if( $post->post_type === 'references') {
 		$sf_archive_slug = '&_sft_archive='.$_SESSION['sft_archive'];
 		$clear_link = home_url().$sf_clear_slug.$sf_archive_slug;
@@ -35,6 +42,7 @@ if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 	$sfid = (int)( $_GET['sfid'] );
 	$sf_inst = $searchandfilter->get( $sfid );
 	
+	// loop through taxonomy terms to display breadcrumbs
 	foreach( $sf_inst->get_fields() as $field )
 	{
 		if( ! isset( $_GET[ $field ] ) ) {
@@ -86,7 +94,7 @@ if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 }
 
 
-
+// display all posts from current filter
 if( have_posts() ):
 
 	if( $is_sfpage ):
@@ -99,6 +107,7 @@ if( have_posts() ):
 	
 	endif;
 	
+	// print out taxonomy term descriptions
 	if( $is_sfpage ) {
 		foreach( $sf_descriptions as $description ) {
 			echo '<div class="page-term-description">' . $description . '</div>';
