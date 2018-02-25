@@ -35,13 +35,13 @@ if ( isset($_GET['_sft_']) ) {
 	//unset($_SESSION['sfid']);
 }
 
-//print_r($_SESSION);
+//printpre($_SESSION);
 
 if ( is_tax() && isset($_SESSION['sfid'] ) ) {   
 	$term_slug = get_query_var( 'term' );
 	$taxname = get_query_var( 'taxonomy' );
 	$term_link = site_url().'/?sfid='.$_SESSION['sfid']."&".$sf_term.$taxname.'='.$term_slug; 
-	if (isset($_SESSION['sft_archive'])) {
+	if (isset($_SESSION['sft_archive']) && $post->post_type === 'references') {
 		$term_link = $term_link.'&_sft_archive='.$_SESSION['sft_archive'];
 	}
 	//echo "<div class='searching'>searching...</div>";
