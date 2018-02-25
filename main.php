@@ -413,3 +413,20 @@ function labs_get_acf_string_value( $name, $post_id = null )
 	return $object['value'];
 }
 endif;
+
+/*********************************************************
+ * debugging
+ *********************************************************/
+
+function printpre($array, $return=FALSE) {
+	ob_start();
+	print "\n<pre>";
+	print_r($array);
+	print "\n</pre>";
+	
+	if ($return)
+		return ob_get_clean();
+	else
+		ob_end_flush();
+}
+
