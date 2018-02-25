@@ -25,10 +25,14 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+.sf-search-title {
+	display: none;
+}
+
 div.plants-table {
   border: 1px solid #CCCCCC;
   background-color: #FFFFFF;
-  width: 100%;
+  width: 98%;
   text-align: left;
   border-collapse: collapse;
 }
