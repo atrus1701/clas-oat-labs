@@ -69,30 +69,30 @@ jQuery( document ).ready(function() {
 // 	});
 
 
-	jQuery( 'li[data-sf-field-input-type="checkbox"] li.sf-level-0' ).each( function() {
-		var checkbox = jQuery( this ).children( '.sf-input-checkbox' );
-		jQuery( checkbox ).hide();
-		
-		var label = jQuery( this ).children( 'label' );
-		jQuery( label ).addClass( 'checkbox-label' );
-		
-		if( jQuery( checkbox ).is( ':checked' ) ) {
-			jQuery( label ).addClass( 'checked' );
-		} else {
-			jQuery( label ).removeClass( 'checked' );
-		}
-		
-		jQuery( label ).click( function() {
-			jQuery( checkbox ).trigger( 'click' );
-		});
-		
-		jQuery( checkbox ).change( function() {
-			if( jQuery( checkbox ).is( ':checked' ) ) {
-				jQuery( label ).addClass( 'checked' );
-			} else {
-				jQuery( label ).removeClass( 'checked' );
-			}
-		});
-	});	
-});
+// 	jQuery( 'li[data-sf-field-input-type="checkbox"] li.sf-level-0' ).each( function() {
+// 		var checkbox = jQuery( this ).children( '.sf-input-checkbox' );
+// 		jQuery( checkbox ).hide();
+// 		
+// 		var label = jQuery( this ).children( 'label' );
+// 		jQuery( label ).addClass( 'checkbox-label' );
+// 		
+// 		if( jQuery( checkbox ).is( ':checked' ) ) {
+// 			jQuery( label ).addClass( 'checked' );
+// 		} else {
+// 			jQuery( label ).removeClass( 'checked' );
+// 		}
+// 		
+// 		jQuery( label ).click( function() {
+// 			jQuery( checkbox ).trigger( 'click' );
+// 		});
+// 		
+// 		jQuery( checkbox ).change( function() {
+// 			if( jQuery( checkbox ).is( ':checked' ) ) {
+// 				jQuery( label ).addClass( 'checked' );
+// 			} else {
+// 				jQuery( label ).removeClass( 'checked' );
+// 			}
+// 		});
+// 	});	
+// });
 

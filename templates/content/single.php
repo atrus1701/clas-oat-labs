@@ -233,10 +233,8 @@ if( $post->post_type === 'references') {
 		<?php echo "<div class='divTableCell'>Entry Date</div>"; ?>
 		<?php echo "<div class='divTableCell'>"; ?>
 		<?php 
-			$date = get_field('entry_dates', false, false);
-			$date = new DateTime($date);
-			echo $date->format('m/d/Y');
-			//echo the_field( 'entry_dates' ); 
+			$date = get_field('entry_date', false, false);
+			if (!empty($date)) echo date("m/d/Y", strtotime($date));
 		?>
 		<?php echo "</div>"; ?> 
 		<?php echo "</div>"; ?>
@@ -245,10 +243,8 @@ if( $post->post_type === 'references') {
 		<?php echo "<div class='divTableCell'>Removal Date</div>"; ?>
 		<?php echo "<div class='divTableCell'>"; ?>
 		<?php 
-			$date = get_field('removal_dates', false, false);
-			$date = new DateTime($date);
-			echo $date->format('m/d/Y');
-			//echo the_field( 'removal_dates' ); 
+			$date = get_field('removal_date',false, true);
+			if(!empty($date)) echo date("m/d/Y", strtotime($date));
 		?>
 		<?php echo "</div>"; ?> 
 		<?php echo "</div>"; ?>
