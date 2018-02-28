@@ -114,7 +114,7 @@ if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 				if( $post->post_type === 'references') {
 					$term_link = site_url().$sf_filter_slug.$taxname.'='.$term_slug.$sf_archive_slug;
 					echo '<a href="' . $term_link . '" title="' . esc_attr( $term->name ) . '">' . $term->name . '</a>';
-				} else {				
+				} else {
 					echo '<a href="' . esc_attr( get_term_link( $term, $taxname ) ) . '" title="' . esc_attr( $term->name ) . '">' . $term->name . '</a>';			
 				}
 				
@@ -196,18 +196,13 @@ else:
 	if( $is_sfpage ) {
 	
 		?>
-		<p>No posts found that matched the current selections.</p>
+		<p>Sorry, nothing matched your search criteria.</p>
 		<?php
 		
 	} else {
 	
 		?>
-		<p>Sorry, but nothing matched your search criteria. Please try again with some different keywords.</p>
-		<form role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>" >
-			<label class="screen-reader-text" for="s">Search for:</label>
-			<div class="textbox_wrapper"><input type="text" value="<?php echo get_search_query(); ?>" name="s" id="s" /></div>
-			<input type="submit" id="searchsubmit" value="Search" />
-		</form>
+		<p>Sorry, nothing matched your search criteria.</p>
 		<?php
 	}
 	
