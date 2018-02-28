@@ -1,6 +1,10 @@
 <?php //vtt_print('default:content:search'); ?>
 
 <?php
+if (!session_id()) {
+    session_start();
+}
+
 
 global $searchandfilter, $wp_the_query, $post;
 $is_sfpage = false;

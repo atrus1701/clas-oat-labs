@@ -3,9 +3,6 @@
 global $wp_query, $wp, $post, $searchandfilter;
 
 //echo "</br>begin listing...</br>";
-if (!session_id()) {
-    session_start();
-}
 
 $is_mt = true;
 $is_sf = false;
