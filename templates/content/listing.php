@@ -3,9 +3,6 @@
 global $wp_query, $wp, $post, $searchandfilter;
 
 //echo "</br>begin listing...</br>";
-if (!session_id()) {
-    session_start();
-}
 
 $is_mt = true;
 $is_sf = false;
@@ -14,50 +11,6 @@ $sf_id = '';
 $sf_term = '_sft_';
 //$archive = NULL;
 
-// if there is a taxonomy term = archive then set session variable
-// this prevents the archive term from being cleared when using the clear button
-// this is only used with post type = reference
-// sites with reference post type (i.e. k12-diversity) have two distinct archives
-// that users usually only want to search separately
-if ( isset($_GET['_sft_archive']) ) {
-	$_SESSION['sft_archive'] = $_GET['_sft_archive'];
-}
-
-
-if ( isset($_GET['sfid']) ) {
-	$_SESSION['sfid'] = $_GET['sfid'];
-// 	$sf_current_query = $searchandfilter->get($_SESSION['sfid'])->current_query();
-// 	$archive = $sf_current_query->get_field_string("_sft_archive");
-}
-
-if ( isset($_GET['_sft_']) ) {
-	unset($_SESSION['sft_archive']);
-	//unset($_SESSION['sfid']);
-}
-
-//printpre($_SESSION);
-
-if ( is_tax() && isset($_SESSION['sfid'] ) ) {   
-	$term_slug = get_query_var( 'term' );
-	$taxname = get_query_var( 'taxonomy' );
-	$term_link = site_url().'/?sfid='.$_SESSION['sfid']."&".$sf_term.$taxname.'='.$term_slug; 
-	if (isset($_SESSION['sft_archive']) && $post->post_type === 'references') {
-		$term_link = $term_link.'&_sft_archive='.$_SESSION['sft_archive'];
-	}
-	//echo "<div class='searching'>searching...</div>";
-	wp_redirect( $term_link );
-	exit();
-} else if ( is_search() && isset($_SESSION['sfid'] ) ){
-	$search_term = urlencode(get_search_query());
-	$search_link = site_url().'/?sfid='.$_SESSION['sfid']."&".'_sf_s='.$search_term;
-	if (isset($_SESSION['sft_archive'])) {
-		$search_link = $search_link.'&_sft_archive='.$_SESSION['sft_archive'];
-	}
-	//echo "searching...";
-	wp_redirect( $search_link );
-	exit();
-}
-//echo "past url redirects...";
 ?>
 
 <div class="page-title">

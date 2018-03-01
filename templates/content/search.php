@@ -1,11 +1,64 @@
 <?php //vtt_print('default:content:search'); ?>
 
 <?php
+if (!session_id()) {
+    session_start();
+}
+
 
 global $searchandfilter, $wp_the_query, $post;
 $is_sfpage = false;
 $sf_names = array();
 $sf_descriptions = array();
+$site_id = "site-".get_current_blog_id();
+
+// if there is a taxonomy term = archive then set session variable
+// this prevents the archive term from being cleared when using the clear button
+// this is only used with post type = reference
+// sites with reference post type (i.e. k12-diversity) have two distinct archives
+// that users usually only want to search separately
+if ( isset($_GET['_sft_archive']) ) {
+	$_SESSION[$site_id]['sft_archive'] = $_GET['_sft_archive'];
+}
+
+
+if ( isset($_GET['sfid']) ) {
+	$_SESSION[$site_id]['sfid'] = $_GET['sfid'];
+// 	$sf_current_query = $searchandfilter->get($_SESSION['sfid'])->current_query();
+// 	$archive = $sf_current_query->get_field_string("_sft_archive");
+}
+
+if ( isset($_GET['_sft_']) ) {
+	unset($_SESSION[$site_id]['sft_archive']);
+	//unset($_SESSION['sfid']);
+}
+
+if ( is_tax() && isset($_SESSION[$site_id]['sfid'] ) ) {   
+	$term_slug = get_query_var( 'term' );
+	$taxname = get_query_var( 'taxonomy' );
+	$term_link = site_url().'/?sfid='.$_SESSION[$site_id]['sfid']."&".$sf_term.$taxname.'='.$term_slug; 
+	if (isset($_SESSION[$site_id]['sft_archive']) && $post->post_type === 'references') {
+		$term_link = $term_link.'&_sft_archive='.$_SESSION[$site_id]['sft_archive'];
+	}
+	//echo "<div class='searching'>taxonomies...</div>";
+	wp_redirect( $term_link );
+	exit();
+} else if ( is_search() && isset($_SESSION[$site_id]['sfid'] ) ){
+	$search_term = urlencode(get_search_query());
+	$search_link = site_url().'/?sfid='.$_SESSION[$site_id]['sfid']."&".'_sf_s='.$search_term;
+	if (isset($_SESSION[$site_id]['sft_archive']) && $post->post_type === 'references') {
+		$search_link = $search_link.'&_sft_archive='.$_SESSION[$site_id]['sft_archive'];
+	}
+	echo "search link:";
+	printpre($search_link);
+	wp_redirect( $search_link );
+	exit();
+}
+
+// printpre("Search SESSION</br>");
+// printpre($_SESSION);
+// printpre("Search GET</br>");
+// printpre($_GET);
 
 if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 	//$sf_filter_slug = '/?sfid=1724&_sft_';
@@ -33,7 +86,7 @@ if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 	// URL for clear button
 	// references post types (k16-diversity) do not clear the archive taxonomy term
 	if( $post->post_type === 'references') {
-		$sf_archive_slug = '&_sft_archive='.$_SESSION['sft_archive'];
+		$sf_archive_slug = '&_sft_archive='.$_SESSION[$site_id]['sft_archive'];
 		$clear_link = home_url().$sf_clear_slug.$sf_archive_slug;
 	} else {
 	 	$clear_link = home_url().$sf_clear_slug;
@@ -71,7 +124,7 @@ if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 				if( $post->post_type === 'references') {
 					$term_link = site_url().$sf_filter_slug.$taxname.'='.$term_slug.$sf_archive_slug;
 					echo '<a href="' . $term_link . '" title="' . esc_attr( $term->name ) . '">' . $term->name . '</a>';
-				} else {				
+				} else {
 					echo '<a href="' . esc_attr( get_term_link( $term, $taxname ) ) . '" title="' . esc_attr( $term->name ) . '">' . $term->name . '</a>';			
 				}
 				
@@ -153,18 +206,13 @@ else:
 	if( $is_sfpage ) {
 	
 		?>
-		<p>No posts found that matched the current selections.</p>
+		<p>Sorry, nothing matched your search criteria.</p>
 		<?php
 		
 	} else {
 	
 		?>
-		<p>Sorry, but nothing matched your search criteria. Please try again with some different keywords.</p>
-		<form role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>" >
-			<label class="screen-reader-text" for="s">Search for:</label>
-			<div class="textbox_wrapper"><input type="text" value="<?php echo get_search_query(); ?>" name="s" id="s" /></div>
-			<input type="submit" id="searchsubmit" value="Search" />
-		</form>
+		<p>Sorry, nothing matched your search criteria.</p>
 		<?php
 	}
 	
