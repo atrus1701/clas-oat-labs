@@ -22,12 +22,6 @@ if ( isset($_GET['_sft_archive']) ) {
 }
 
 
-if ( isset($_GET['sfid']) ) {
-	$_SESSION[$site_id]['sfid'] = $_GET['sfid'];
-// 	$sf_current_query = $searchandfilter->get($_SESSION['sfid'])->current_query();
-// 	$archive = $sf_current_query->get_field_string("_sft_archive");
-}
-
 if ( isset($_GET['_sft_']) ) {
 	unset($_SESSION[$site_id]['sft_archive']);
 	//unset($_SESSION['sfid']);
@@ -60,11 +54,12 @@ if ( is_tax() && isset($_SESSION[$site_id]['sfid'] ) ) {
 // printpre("Search GET</br>");
 // printpre($_GET);
 
-if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
-	//$sf_filter_slug = '/?sfid=1724&_sft_';
-	$sf_filter_slug = '/?sfid='.$_GET['sfid'].'&_sft_';
-	$sf_id = $_GET['sfid'];
-	$sf_clear_slug = '/?sfid='.$_GET['sfid'];
+
+if( isset( $_SESSION[$site_id]['sfid'] ) ) {
+
+	$sf_filter_slug = '/?sfid='.$_SESSION[$site_id]['sfid'].'&_sft_';
+	$sf_id = $_SESSION[$site_id]['sfid'];
+	$sf_clear_slug = '/?sfid='.$_SESSION[$site_id]['sfid'];
 	$is_sfpage = true;
 	
 	// print out label for post type for use in display of # of posts found
@@ -92,7 +87,7 @@ if( isset( $_GET ) && isset( $_GET['sfid'] ) ) {
 	 	$clear_link = home_url().$sf_clear_slug;
 	}
 	echo '<a class="clear-filters" href="' . esc_attr( $clear_link ) . '" title="Clear Filters">Clear</a>';
-	$sfid = (int)( $_GET['sfid'] );
+	$sfid = (int)( $_SESSION[$site_id]['sfid'] );
 	$sf_inst = $searchandfilter->get( $sfid );
 	
 	// loop through taxonomy terms to display breadcrumbs
