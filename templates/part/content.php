@@ -7,9 +7,11 @@ global $searchandfilter, $post;
 // requires a custom field named "sfid" with the id of the search and filter
 // pro form as its value on the front page
 $site_id = "site-".get_current_blog_id();
-if (is_front_page() ) {	
-	$post_id = $post->ID;
-	$_SESSION[$site_id]['sfid'] = get_field("sfid", $post_id);
+
+if (!isset($_SESSION[$site_id]['sfid']) ) {
+	$frontpage_id = get_option( 'page_on_front' );
+	$_SESSION[$site_id]['sfid'] = get_field("sfid", $frontpage_id);
+	printpre ($_SESSION[$site_id]['sfid']);
 }
 
 if (isset($searchandfilter) && isset($_SESSION[$site_id]['sfid']) ) {
