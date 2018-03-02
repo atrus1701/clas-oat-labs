@@ -11,7 +11,6 @@ $site_id = "site-".get_current_blog_id();
 if (!isset($_SESSION[$site_id]['sfid']) ) {
 	$frontpage_id = get_option( 'page_on_front' );
 	$_SESSION[$site_id]['sfid'] = get_field("sfid", $frontpage_id);
-	printpre ($_SESSION[$site_id]['sfid']);
 }
 
 if (isset($searchandfilter) && isset($_SESSION[$site_id]['sfid']) ) {
