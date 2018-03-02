@@ -3,12 +3,6 @@
 global $wp_query, $wp, $post, $searchandfilter;
 
 //echo "</br>begin listing...</br>";
-
-$is_mt = true;
-$is_sf = false;
-$search_term = "";
-$sf_id = '';
-$sf_term = '_sft_';
 //$archive = NULL;
 
 ?>
